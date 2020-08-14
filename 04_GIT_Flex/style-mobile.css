@@ -1,0 +1,70 @@
+@media screen and (max-width: 600px) {
+
+    nav {
+        display: block;
+        padding: 0;
+        text-align: center;
+    }
+
+    .nav-col {
+        padding: 5px 0;
+    }
+
+    .portfolio p {
+        margin: 45px 0 0 0;
+        padding: 0 50px;
+    }
+
+    .portfolio hr {
+        margin: 1em 20%;
+    }
+
+    .portfolio-row {
+        display: block;
+        overflow: visible;
+        height: auto;
+        padding: 0;
+    }
+
+    .portfolio-col {
+        padding: 25px 0;
+        height: 300px;
+        overflow: hidden;
+    }
+
+    .portfolio-col img {
+        max-width: unset;
+        max-height: 100%;
+    }
+
+    .fas {
+        padding: 50px 0;
+    }
+
+    .fas>div>p {
+        margin: 45px 0 0 0;
+        padding: 0 10%;
+    }
+
+    .fas>div>div>p {
+        padding: 0 15%;
+
+    }
+
+    .fas-flex {
+        display: block;
+    }
+
+    .fas-flex-col {
+        width: 100%;
+    }
+
+    .fas input {
+        width: 90%;
+        margin: 0 5%;
+    }
+
+    #footer-txt {
+        font-size: 10px;
+    }
+}

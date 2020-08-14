@@ -1,0 +1,239 @@
+/* Stylesheet */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Open Sans", Arial, Helvetica, sans-serif;
+    color: #414A4F;
+}
+
+/* header style */
+
+header {
+    background-image: url(./img/hero.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    padding: 30px 75px;
+}
+
+.txt-logo {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.nav-col a {
+    color: white;
+    text-decoration: none;
+    padding-left: 25px;
+    font-weight: bold;
+}
+
+.bg-opacity {
+    background-color: rgba(100, 100, 100, 0.65);
+}
+
+.header-content {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-content-wrapper {
+    text-align: center;
+}
+
+.header-content h1 {
+    font-size: 38px;
+    margin-bottom: 10px;
+}
+
+.header-content p {
+    font-size: 20px;
+    margin-top: 0;
+}
+
+.header-content button {
+    padding: 10px 26px;
+    color: white;
+    background-color: #2792E6;
+    border: none;
+    font-weight: bold;
+    font-size: 12px;
+    margin-top: 15px;
+}
+
+.header-content button:hover {
+    cursor: pointer;
+}
+
+/* Kraj na header */
+
+/* Section portfolio */
+
+.portfolio {
+    text-align: center;
+}
+
+.portfolio h2 {
+    text-transform: capitalize;
+    margin-top: 100px;
+    margin-bottom: 0;
+}
+
+.portfolio p {
+    margin: 45px 30% 0 30%;
+    font-size: 12px;
+    line-height: 2em;
+}
+
+.portfolio hr {
+    margin: 1em 45%;
+    border-color: #2196F3;
+    background-color: #2196F3;
+}
+
+/* portfolio images */
+
+.portfolio-images {
+    padding: 50px;
+}
+
+.portfolio img {
+    max-width: 100%;
+}
+
+.portfolio-row {
+    display: flex;
+    height: 200px;
+    align-content: space-between;
+    overflow: hidden;
+    padding: 24px 0;
+}
+
+.portfolio-col {
+    padding: 0 12px;
+}
+
+.flex-1 {
+    flex-grow: 1;
+}
+
+.flex-2 {
+    flex-grow: 3;
+}
+
+/* section fas */
+
+.fas {
+    background-color: #F7F7F7;
+    text-align: center;
+    padding: 50px;
+}
+
+.fas h2 {
+    text-transform: capitalize;
+    /* margin-top: 100px; */
+    margin-bottom: 0;
+}
+
+.fas>div>p {
+    margin: 45px 30% 0 30%;
+    font-size: 12px;
+    line-height: 2em;
+}
+
+.fas>div>div>p {
+    /* margin: 45px 30% 0 30%; */
+    font-size: 12px;
+    line-height: 2em;
+}
+
+.fas hr {
+    margin: 1em 45%;
+    border-color: #2196F3;
+    background-color: #2196F3;
+    margin-bottom: 75px;
+}
+
+.fas input {
+    width: 20em;
+    border: 1px solid grey;
+    padding: 8px 10px;
+}
+
+.fas button {
+    padding: 10px 26px;
+    color: white;
+    background-color: #2792E6;
+    border: none;
+    font-weight: bold;
+    font-size: 12px;
+    margin-top: 15px;
+}
+
+.fas button:hover {
+    cursor: pointer;
+}
+
+.fas-flex {
+    display: flex;
+    flex-basis: 33.33%;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 75px;
+}
+
+.fas-flex-col {
+    width: 30%;
+}
+
+.fas-flex-col i {
+    font-size: 32px;
+    color:#2792E6;
+}
+
+/* footer */
+
+footer {
+    text-align: center;
+    background-color: #414A4F;
+    color: white;
+    padding: 50px 0;
+}
+
+#footer-icons {
+    font-size: 28px;
+    letter-spacing: 3px;
+    margin-bottom: 25px;
+}
+
+#footer-icons i:hover {
+    cursor: pointer;
+}
+
+#footer-txt {
+    text-transform: uppercase;
+    font-size: 12px;
+    line-height: 1.8em;
+}
+#footer-txt a {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+}
