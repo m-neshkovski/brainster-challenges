@@ -16,6 +16,10 @@
     width: 100%;
 }
 
-/* .navbar {
-    padding: 0 1rem;
-} */
+.bg-icon-size-and-position {
+    position: absolute;
+    left: -2.84285714em;
+    top: .64285714em;
+    height: 1.3em;
+    width: 1.3em;   
+}
