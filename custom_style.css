@@ -1,0 +1,21 @@
+/* custom css */
+
+.home-bg-image {
+    background-image: url(./Images/home.jpg);
+}
+
+.height-100vh {
+    height: 100vh;
+}
+
+.bg-custom {
+    background-color: #4900D5;
+}
+
+.img-w-100 {
+    width: 100%;
+}
+
+/* .navbar {
+    padding: 0 1rem;
+} */
