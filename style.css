@@ -33,4 +33,65 @@ body {
 
 /* local selectors */
 
+/* Home selectors start */
+
+#home {
+  padding: 0 !important;
+  background-image: url(./Images/lights.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.home-carousel-height {
+  height: 60vh;
+  /* overflow-x: hidden; */
+}
+
+.home-img-min-height {
+  width: 100%;
+  min-height: 60vh;
+  /* overflow: hidden; */
+}
+
+/* Section 2 start */
+#section-2 {
+  padding: 0 !important;
+  background-image: url(./Images/lights.jpg);
+  background-size: cover;
+}
+/* Section 2 end */
+
+/* Section 3 start */
+#section-3 {
+  padding: 0 !important;
+  background-image: url(./Images/media.jpg);
+  background-size: cover;
+}
+
+.bg-black-transparent-65 {
+  background-color: rgba(0,0,0,0.65);
+}
+
+.media-dialog-max-width {
+  max-width: 768px !important;
+}
+
+.img-fluid-galery {
+  width: 100%;
+  height: auto;
+}
+/* Section 3 end */
+
+/* footer */
+
+.bg-black {
+  background-color: black;
+}
+
+/* footer end */
+
+
+/* Home selectors end */
+
+
 
