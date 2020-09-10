@@ -37,20 +37,22 @@ body {
 
 #home {
   padding: 0 !important;
-  background-image: url(./Images/lights.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
 }
 
 .home-carousel-height {
   height: 60vh;
-  /* overflow-x: hidden; */
+  overflow: hidden;
+}
+
+.carousel-caption-home-correction {
+  /* top: 25vh; */
+  top: -50%;
+  transform: translateY(45%);
 }
 
 .home-img-min-height {
   width: 100%;
   min-height: 60vh;
-  /* overflow: hidden; */
 }
 
 /* Section 2 start */
@@ -58,6 +60,7 @@ body {
   padding: 0 !important;
   background-image: url(./Images/lights.jpg);
   background-size: cover;
+  background-attachment: fixed;
 }
 /* Section 2 end */
 
@@ -66,6 +69,7 @@ body {
   padding: 0 !important;
   background-image: url(./Images/media.jpg);
   background-size: cover;
+  background-attachment: fixed;
 }
 
 .bg-black-transparent-65 {
@@ -81,6 +85,34 @@ body {
   height: auto;
 }
 /* Section 3 end */
+
+/* About Page selectors */
+
+.about-img-background {
+  padding: 0 !important;
+  background-image: url(./Images/image1.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.about-image-offset {
+  top: -30px;
+}
+
+.about-card-bg-custom {
+  background-color: #FF0000;
+}
+
+.caurosel-control-about-correction {
+  width: 10%;
+}
+
+.acordion-card-header-correction {
+  padding: 0;
+}
+
+
+/* Services Page selectors */
 
 /* footer */
 
