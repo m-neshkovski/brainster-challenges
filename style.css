@@ -7,6 +7,7 @@ body {
 }
 
 /* navbar correction start */
+/* mi praveshe problem so padding pa zatoa se korekciite */
 
 .navbar {
   padding: .5rem 0rem;
@@ -28,21 +29,44 @@ body {
   padding-right: 1rem;
   padding-left: 1rem;
 }
-
 /* navbar correction end */
+
+/* Senkata e dodadena na text vrz sliki, nekaok ne mi se citashe kaj sto e bel tekst na svetla pozadina */
+.text-shaddow {
+  text-shadow: 2px 2px 3px black;
+}
+
+.bg-black-transparent-65 {
+  background-color: rgba(0,0,0,0.65);
+}
+
+.bg-black {
+  background-color: black;
+}
+
+.text-black {
+  color: black;
+}
+
+.border-black {
+  border-color: black;
+}
+
+.openning-banner-height {
+  height: 60vh;
+  overflow: hidden;
+}
+
+.openning-banner-img-background {
+  padding: 0 !important;
+  background-image: url(./Images/image1.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+}
 
 /* local selectors */
 
 /* Home selectors start */
-
-/* #home {
-  padding: 0 !important;
-} */
-
-.home-carousel-height {
-  height: 60vh;
-  overflow: hidden;
-}
 
 .carousel-caption-home-correction {
   top: -60%;
@@ -54,46 +78,40 @@ body {
   min-height: 60vh;
 }
 
-/* Section 2 start */
-#section-2 {
+/* Banner 1 start */
+#banner-1 {
   padding: 0 !important;
   background-image: url(./Images/lights.jpg);
   background-size: cover;
   background-attachment: fixed;
 }
-/* Section 2 end */
+/* Banner 1 end */
 
-/* Section 3 start */
-#section-3 {
+
+/* Banner 2 start */
+#banner-2 {
   padding: 0 !important;
   background-image: url(./Images/media.jpg);
   background-size: cover;
   background-attachment: fixed;
 }
 
-.bg-black-transparent-65 {
-  background-color: rgba(0,0,0,0.65);
-}
-
 .media-dialog-max-width {
   max-width: 768px !important;
 }
+/* Banner 2 end */
 
+
+/* Section 3 start */
 .img-fluid-galery {
   width: 100%;
   height: auto;
 }
 /* Section 3 end */
+/* Home selectors end */
 
-/* About Page selectors */
 
-.about-img-background {
-  padding: 0 !important;
-  background-image: url(./Images/image1.jpg);
-  background-size: cover;
-  background-attachment: fixed;
-}
-
+/* About Page selectors start */
 .about-image-offset {
   top: -30px;
 }
@@ -105,24 +123,13 @@ body {
 .caurosel-control-about-correction {
   width: 10%;
 }
+/* About Page selectors end */
 
+
+/* Services Page selectors start */
 .acordion-card-header-correction {
   padding: 0;
 }
-
-
-/* Services Page selectors */
-
-/* footer */
-
-.bg-black {
-  background-color: black;
-}
-
-/* footer end */
-
-
-/* Home selectors end */
-
+/* Services Page selectors end */
 
 
