@@ -35,9 +35,9 @@ body {
 
 /* Home selectors start */
 
-#home {
+/* #home {
   padding: 0 !important;
-}
+} */
 
 .home-carousel-height {
   height: 60vh;
@@ -45,8 +45,7 @@ body {
 }
 
 .carousel-caption-home-correction {
-  /* top: 25vh; */
-  top: -50%;
+  top: -60%;
   transform: translateY(45%);
 }
 
