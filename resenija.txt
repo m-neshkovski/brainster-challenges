@@ -1,0 +1,126 @@
+2.
+a.
+------------
+SELECT f.title, f.premiere_at, c.name, f.production 
+FROM `film` AS f 
+INNER JOIN country as c on f.origin_country_id=c.id
+-------------
+
+------------
+SELECT gf.id, gf.title, GROUP_CONCAT(ge.genre_name) AS genre FROM 
+	(SELECT g.id, f.title, g.genre_id FROM `film_genre` AS g
+	INNER JOIN film AS f ON g.film_id=f.id)
+AS gf
+INNER JOIN genre AS ge on gf.genre_id=ge.id
+GROUP BY gf.title
+ORDER BY id
+------------
+
+-----------
+ostanati podatoci
+
+SELECT a.title, a.premiere_at, b.genre, a.name AS country_of_origin, a.production 
+FROM 	(		SELECT f.title, f.premiere_at, c.name, f.production 
+						FROM `film` AS f 
+						INNER JOIN country as c on f.origin_country_id=c.id) as a 
+INNER JOIN 		(SELECT gf.id, gf.title, GROUP_CONCAT(ge.genre_name) AS genre FROM 
+				(SELECT g.id, f.title, g.genre_id FROM `film_genre` AS g
+				INNER JOIN film AS f ON g.film_id=f.id)
+				AS gf
+				INNER JOIN genre AS ge on gf.genre_id=ge.id
+				GROUP BY gf.title
+				ORDER BY id) AS b 
+ON a.title=b.title
+
+ili
+
+USING (title)
+----------------------
+broj na akteri u film
+
+SELECT y.title, x.actors_in_film FROM (SELECT film_id, COUNT(actor_id) as actors_in_film FROM actor_in_film
+GROUP BY film_id) AS x
+INNER JOIN film as y ON x.film_id=y.id
+
+***************Resenie na 2-a*****************
+
+SELECT c.title, c.premiere_at, c.genre, c.country_of_origin, c.production, d.actors_in_film FROM
+	(SELECT a.title, a.premiere_at, b.genre, a.name AS country_of_origin, a.production 
+		FROM 	(		SELECT f.title, f.premiere_at, c.name, f.production 
+						FROM `film` AS f 
+						INNER JOIN country as c on f.origin_country_id=c.id) as a 
+		INNER JOIN 		
+     			(	SELECT gf.id, gf.title, GROUP_CONCAT(ge.genre_name) AS genre FROM 
+				(	SELECT g.id, f.title, g.genre_id FROM `film_genre` AS g
+				INNER JOIN film AS f ON g.film_id=f.id)
+				AS gf
+				INNER JOIN genre AS ge on gf.genre_id=ge.id
+				GROUP BY gf.title
+				ORDER BY id) AS b 
+ON a.title=b.title
+) AS c 
+INNER JOIN 
+	(SELECT y.title, x.actors_in_film FROM (SELECT film_id, COUNT(actor_id) as actors_in_film FROM actor_in_film
+	GROUP BY film_id) AS x
+	INNER JOIN film as y ON x.film_id=y.id) AS d ON c.title=d.title
+
+**********************************************
+
+resenie 2.b
+
+SELECT a.name, a.surname, a.nickname, YEAR(a.birthday), a.agent_code, b.actor_in_films FROM actor AS a
+INNER JOIN 
+
+(SELECT actor_id, COUNT(film_id) actor_in_films FROM actor_in_film
+WHERE 1
+GROUP BY actor_id) AS b
+ON a.id=b.actor_id
+
+resenie 2.c
+
+SELECT c.title, d.name AS premiere_city, c.FWR as 'FWR($)', projector AS projection_type FROM (SELECT a.title, a.premiere_city_id AS premiere_city, a.first_week_revenue as FWR, projection_type_id FROM `film` as a
+INNER JOIN title_type AS b ON a.title_type_id=b.id
+WHERE type="Movie") AS c
+INNER JOIN city AS d ON c.premiere_city=d.id
+INNER JOIN projection_type AS e ON c.projection_type_id=e.id
+ORDER BY projection_type
+
+2.d
+
+SELECT c.title AS oscar_for, d.role_name AS for_role, YEAR(a.date_at) AS oscar_year, b.name, b.surname, b.nickname, YEAR(b.birthday) AS year_of_birth, b.agent_code from oscar AS a
+INNER JOIN actor AS b ON a.actor_id=b.id
+INNER JOIN film AS c ON a.film_id=c.id
+INNER JOIN role AS d ON a.role_id=d.id
+WHERE 1
+ORDER BY oscar_year DESC
+
+*****************************
+
+3-a
+
+SELECT film.id, film.title, film.premiere_at, country.name, film.production, city.name, film.first_week_revenue, projection_type.projector,actor_in_film.actor_id, GROUP_CONCAT(CONCAT(actor.name,' ',actor.surname)) AS actors_in_film, CONCAT(director.name,' ',director.surname) AS director FROM film
+LEFT JOIN title_type ON film.title_type_id=title_type.id
+LEFT JOIN country ON film.origin_country_id=country.id
+LEFT JOIN city ON film.premiere_city_id=city.id
+LEFT JOIN projection_type ON film.projection_type_id=projection_type.id
+LEFT JOIN director_film ON film.id=director_film.film_id
+LEFT JOIN director ON director_film.director_id=director.id
+LEFT JOIN actor_in_film ON actor_in_film.film_id=film.id
+LEFT JOIN actor ON actor_in_film.actor_id=actor.id
+WHERE title_type.type="movie"
+GROUP BY film.title
+ORDER BY director
+
+3-b
+
+SELECT * FROM
+	(SELECT actor_critic.id, actor.name, actor.surname, actor.nickname, YEAR(actor.birthday) AS birth_year, actor.agent_code, (actor_critic.acting+actor_critic.expression+actor_critic.naturalism+actor_critic.dedication)/4 AS ocena FROM `actor_critic`
+	LEFT JOIN actor ON actor_critic.actor_id=actor.id) AS a
+WHERE a.ocena<=(SELECT AVG((acting+expression+naturalism+dedication)/4) AS prosecna_ocena FROM actor_critic)
+ORDER BY ocena DESC
+
+3-c
+
+SELECT oscar.id, actor.name, actor.surname, actor.nickname, YEAR(actor.birthday) as birth_year, actor.agent_code FROM `oscar`
+LEFT JOIN actor ON oscar.actor_id=actor.id
+WHERE (2020-YEAR(actor.birthday))>=(SELECT AVG(2020-YEAR(birthday)) AS prosecna_starost FROM `actor`)
