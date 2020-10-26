@@ -1,0 +1,234 @@
+<?php
+
+
+// vraca true ako e POST, false ako ne e post
+function if_POST() {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        return true;
+    }
+
+    return false;
+}
+
+// proveruva dali e vnesena vrednost za pole vo zavisnost pd POST i GET metod i vraca true ako ima vrednost i false ako nema
+
+function fieldRequired($fieldName, $method) {
+    if ($method == $_SERVER['REQUEST_METHOD']) {
+        if (isset($_POST[$fieldName]) && !empty($_POST[$fieldName])) {
+            return true;
+        }
+    } 
+    
+    // if ($method == 'GET') {
+    //     if (isset($_GET[$fieldName]) && !empty($_GET[$fieldName])) {
+    //         return true;
+    //     }  
+    // } 
+
+    return false;
+}
+
+function validateEmail($email) {
+    $temp = explode('@', $email);
+    if (strlen($temp[0]) >= 5) {
+        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return true;
+        }
+    } 
+
+    return false;
+
+}
+
+function readLineByLine($fileToOpen) {
+    $file = fopen($fileToOpen,"r");
+
+while(! feof($file))
+  {
+  echo fgets($file). "<br />";
+  }
+
+fclose($file);
+}
+
+function fileToArray($fileToMakeArray) {
+    $file = fopen($fileToMakeArray,"r");
+    $tempArrey = [];
+while(! feof($file))
+  {
+    $tempArrey[] = explode(', ', fgets($file));
+//   echo fgets($file). "<br />";
+  }
+  fclose($file);
+  
+  return $tempArrey;
+}
+
+function emailExistsIn($email, $arrey) {
+    $temp = false;
+    foreach ($arrey as $key => $value) {
+        if ((isset($value[0])) && ($value[0] === $email)) {
+            $temp = true;
+            break;
+        }
+    }
+    return $temp;
+}
+
+function usernameExistsIn($username, $arrey) {
+    $temp = false;
+    foreach ($arrey as $key => $value) {
+        if (isset($value[1])) {
+            $tempArr = explode('=', $value[1]);
+            if ($tempArr[0] === $username) {
+                $temp = true;
+                break;
+            }
+        }
+    }
+    return $temp;
+}
+
+function loginCheck($email, $username, $password, $arrey) {
+    $str = $username . "=" . $password . "\n";
+    $temp = false;
+    foreach ($arrey as $key => $value) {
+        if ((isset($value[0])) && ($value[0] === $email)) {
+            if (isset($value[1]) && ($value[1] === $str)) {
+                
+                $temp = true;
+                break; 
+            }
+        }
+    }
+    return $temp;
+}
+
+function returnPass($email, $username, $arrey) {
+    $temp = '';
+    foreach ($arrey as $key => $value) {
+        if ((isset($value[0])) && ($value[0] === $email)) {
+            if (isset($value[1])) {
+                $tempArr = explode('=', $value[1]);
+                if ($tempArr[0] === $username) {
+                    $temp = $tempArr[1];
+                    break;
+                }
+            }
+            $temp = true;
+            break;
+        }
+    }
+    return $temp;
+}
+
+
+
+function has_string($file, $arrey, $element) {
+    $string = $array[$element];
+    $valid = FALSE;
+    $handle = fopen($file, "r");
+    if ($handle) {
+        // Read file line-by-line
+        while (($buffer = fgets($handle))) {
+            if (strpos($buffer, $string))
+                $valid = TRUE;
+        }
+    }
+    fclose($handle);
+    return $valid;
+}
+
+function check_Email_In_File($file, $email) {
+    // $tempfile = fopen("$file", "r" or die("Unable to open file!"));
+    $arrey=[];
+    $str='';
+    while (!feof($file)) {
+        $str = fgets($file);
+        $arrey = explode(', ', $str);
+        if ($arrey[0] == $email) {
+            return true;
+            break;
+        }
+    }
+    
+    return false;
+}
+
+// $myfile = fopen("webdictionary.txt", "r") or die("Unable to open file!");
+// // Output one line until end-of-file
+// while(!feof($myfile)) {
+//   echo fgets($myfile) . "<br>";
+// }
+// fclose($myfile);
+
+
+
+// Does string contain letters?
+function _s_has_letters( $string ) {
+    return preg_match( '/[a-zA-Z]/', $string );
+}
+
+// Does string contain numbers?
+function _s_has_numbers( $string ) {
+    return preg_match( '/\d/', $string );
+}
+
+// Does string contain special characters?
+function _s_has_special_chars( $string ) {
+    return preg_match('/[^a-zA-Z\d]/', $string);
+}
+
+//Username moze da ima samo bukvi i brojki
+function validateUsername($string) {
+    if (!_s_has_special_chars( $string )) {
+        return true;
+    }
+
+    return false;
+}
+
+function validatePassword($string) {
+    if (strlen($string) >= 8) {
+        if (_s_has_special_chars( $string )) {
+            if (_s_has_numbers( $string )) {
+                if (_s_has_letters( $string )) {
+                    return true;
+                }
+            }
+        }
+    }
+
+    return false;
+}
+
+function stringMatch($str1, $str2) {
+    
+    if ($str1 == $str2) {
+        return true;
+    }
+    
+    return false;
+    
+}
+
+function passwordCheck($array) {
+    $temp=$array;
+    if ($temp['password'] == $temp['repeatPass']) {
+        return true;
+    }
+
+    return false;
+}
+
+function newUser($file, $arrey) {
+
+    $Myfile = fopen($file, 'a') or die("Unable to open file!");
+    $str = $arrey['email'] . ", " . $arrey['username'] . "=" . $arrey['password'] . "\n";
+    fwrite($Myfile, $str);
+    fclose($Myfile);
+}
+
+
+
+?>
