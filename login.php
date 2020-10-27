@@ -45,15 +45,7 @@ require('./functions.php');
 
                         <?php if (fieldRequired('email', 'POST')) {
                                 if (validateEmail($_POST['email'])) {
-                                    // if (!emailExistsIn($_POST['email'], $credentials)) {
                                             echo '<div class="valid-feedback text-left">Valid email.</div>';
-                                        // } else {
-                                        //     if (usernameExistsIn($_POST['username'], $credentials)) {
-                                        //         echo '<div class="invalid-feedback text-left text-warning">You are already registered. Your password is: ' . returnPass($_POST['email'], $_POST['username'], $credentials) . '</div>';
-                                        //     } else {
-                                        //         echo '<div class="invalid-feedback text-left">You are already registered with diferent username.</div>';
-                                        //     }
-                                        // }
                                 } else {
                                     echo '<div class="invalid-feedback text-left">Not a valid email!!!</div>';
                                 }
@@ -65,7 +57,7 @@ require('./functions.php');
                     </div>
                     <div class="form-group">
                         <input id="username" name="username" type="text" class="form-control <?php if (if_POST()) { 
-                                                                                                if (fieldRequired('username', 'POST') && validateUsername($_POST['username'])) {
+                                                                                                if (fieldRequired('username', 'POST') && validateUsername($_POST['username']) && loginCheck($_POST['email'], $_POST['username'], $_POST['password'], $credentials)) {
                                                                                                     echo 'is-valid';
                                                                                                 } else {
                                                                                                     echo 'is-invalid';
@@ -75,12 +67,11 @@ require('./functions.php');
                                                                                                                                                         } ?>">
                         <?php if (fieldRequired('username', 'POST')) {
                                 if (validateUsername($_POST['username'])) {
-                                    // if (!usernameExistsIn($_POST['username'], $credentials)) {
-                                        echo '<div class="valid-feedback text-left">Valid username.</div>';
-                                    // } else {
-                                    //     echo '<div class="invalid-feedback text-left">User with that username already exists.</div>';
-                                    // }
-
+                                    if (if_POST()) {
+                                        if (loginCheck($_POST['email'], $_POST['username'], $_POST['password'], $credentials)) {
+                                            echo '<div class="valid-feedback text-left">Valid username.</div>';
+                                        }
+                                    } 
                                 } else {
                                     echo '<div class="invalid-feedback text-left">Username can contain only letters and numbers!!!</div>';
                                 }
@@ -105,24 +96,16 @@ require('./functions.php');
                                         if (loginCheck($_POST['email'], $_POST['username'], $_POST['password'], $credentials)) {
 
                                             // ispolneti uslovi da odi natamu
-
+                                            // todo da se kodira message
                                             $message = $_POST['username'];
                                             $message=urlencode($message);
                                             header("Location:welcome.php?message=".$message);
                                             exit();
 
                                         } else {
-                                            
                                             echo '<div class="invalid-feedback text-left">Username and password do not match.</div>';
                                         }
                                     } 
-                                        
-                                    
-
-
-
-
-                                    
                                 } else {
                                     echo '<div class="invalid-feedback text-left">Password Must be at least 8 characters, minimum one capitall letter and minimum one special sign!!!</div>';
                                 }

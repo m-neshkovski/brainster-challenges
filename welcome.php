@@ -19,7 +19,7 @@
     <div class="container">
         <div class="row row-100vh d-flex justify-content-center align-items-center">
             <div class="col-12 text-center">
-                <div class="display-3">Welcome <?php echo $_GET['message'] ?></div>
+                <div class="display-3">Welcome <span class="text-capitalize"><?php echo $_GET['message'] ?></span></div>
             </div>
             <div class="col-4 text-center">
                 <a type="button" href="./index.html" class="btn btn-secondary text-light btn-block">Log out</a>

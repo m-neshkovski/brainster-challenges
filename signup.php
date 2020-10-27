@@ -42,7 +42,6 @@
                                                                                                 } ?>" placeholder="Your email (required)" value="<?php if (fieldRequired('email', 'POST')) {
                                                                                                                                                             echo $_POST['email'];
                                                                                                                                                         } ?>">
-
                         <?php if (fieldRequired('email', 'POST')) {
                                 if (validateEmail($_POST['email'])) {
                                     if (!emailExistsIn($_POST['email'], $credentials)) {
@@ -134,13 +133,14 @@
                                         && (fieldRequired('username', 'POST') && validateUsername($_POST['username']) && !usernameExistsIn($_POST['username'], $credentials))
                                         && (fieldRequired('password', 'POST') && validatePassword($_POST['password']))) {
 
+                                            // ispolneti uslovi da odi ponatamu i za zapise nov user i da se redirektira na welcome.php
                                             newUser('./credentials.txt', $_POST);
-
+                                            // redirect
+                                            // todo da se kodira message
                                             $message = $_POST['username'];
                                             $message=urlencode($message);
                                             header("Location:welcome.php?message=".$message);
                                             exit();
-                                            // header('Location: ./welcome.php');
 
                                         } 
                                 }
