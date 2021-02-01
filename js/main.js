@@ -8,7 +8,6 @@ let brandActive = 'none'
 fetch('https://json-project3.herokuapp.com/products')
     .then(responce => { return responce.json() })
     .then(data => {
-        console.log(filterActive)
         // pocetna sostojba karticki
         let filteredData = data
         createCards(filteredData);
@@ -80,7 +79,6 @@ fetch('https://json-project3.herokuapp.com/products')
                         createCards(filteredData.filter(bike => { return bike.brand == brandFound.brand }))
                         $('.list-group-item').each((index, group) => {
                             if (!(group.id == 'SHOWALL' || group.id == 'MALE' || group.id == 'FEMALE')) {
-                                console.log('tocno', $(group));
                                 $(group).removeClass('list-group-item-active')
                                 $(group).addClass('list-group-item-pasive')
                                 $(group).children().eq(0).removeClass('badge-custom-active')
@@ -96,7 +94,6 @@ fetch('https://json-project3.herokuapp.com/products')
                         createCards(filteredData);
                         brandActive = 'none';
                         if (!(group.id == 'SHOWALL' || group.id == 'MALE' || group.id == 'FEMALE')) {
-                            console.log('tocno', $(group));
                             $(group).removeClass('list-group-item-active')
                             $(group).addClass('list-group-item-pasive')
                             $(group).children().eq(0).removeClass('badge-custom-active')
@@ -109,7 +106,6 @@ fetch('https://json-project3.herokuapp.com/products')
                         createCards(filteredData.filter(bike => { return bike.brand == brandFound.brand }))
                         $('.list-group-item').each((index, group) => {
                             if (!(group.id == 'SHOWALL' || group.id == 'MALE' || group.id == 'FEMALE')) {
-                                console.log('tocno', $(group));
                                 $(group).removeClass('list-group-item-active')
                                 $(group).addClass('list-group-item-pasive')
                                 $(group).children().eq(0).removeClass('badge-custom-active')
