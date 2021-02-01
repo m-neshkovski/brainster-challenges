@@ -3,20 +3,28 @@ body {
 }
 
 .card-body {
-	background-color: #FFA500;
+	background-color: orange;
 	margin: 0;
 	/* padding: 0; */
 	border: none;
 }
 
 .nav-link:hover {
-	color: #FFA500 !important;
+	color: orange !important;
 	background-color: #EDEDED !important;
+	text-shadow: 1px 1px 1px gray;
 }
 
 .active {
-	color: #FFA500 !important;
+	color: orange !important;
 	background-color: #EDEDED !important;
+	text-shadow: 1px 1px 1px gray;
+}
+
+.nav-link-right:hover {
+	color: orange !important;
+	background-color: #f8f9fa !important;
+	text-shadow: 1px 1px 3px gray;
 }
 
 .card {
@@ -24,7 +32,9 @@ body {
 }
 
 .card:hover {
-	border: 3px solid #FFA500;
+	border: 3px solid orange;
+	cursor: pointer;
+	box-shadow: 0px 0px 15px gray;
 }
 
 .image-wrapper {
@@ -41,24 +51,26 @@ body {
 
 .list-group-item-active {
 	background-color: #F8F9FA;
-	color: #FFA500;
+	color: orange;
 	border: none;
 	padding: 5px 0;
 	font-weight: bold;
 	cursor: pointer;
+	text-shadow: 1px 1px 2px gray;
 }
 
 .badge-custom-pasive {
-	background-color: #EDEDED;
-	color: #7C7C7D;
+	background-color: #d3d3d3;
+	color: #5c5c5c;
 }
 
-
+/*use background-color: #d3d3d3; color: #5c5c5c; for the badges*/
 
 .badge-custom-active {
-	background-color: #FFA500;
+	background-color: orange;
 	/* color: #7C7C7D; */
 	color: white;
+	box-shadow: 1px 1px 2px gray;
 }
 
 .social-icon {
@@ -68,13 +80,16 @@ body {
 	padding: 5px;
 	height: 45px;
 	width: 45px;
-	background-color: #FFA500;
+	background-color: orange;
 	color: white;
 }
 
 .social-icon:hover {
-	background-color: white;
-	color:#FFA500;
+	background-color: grey;
+	color: white;
+	box-shadow: 2px 2px 3px gray;
+	text-shadow: 1px 1px 2px black;
+
 }
 
 .footer-link {
@@ -82,12 +97,12 @@ body {
 }
 
 .footer-link:hover {
-	color: #FFA500;
+	color: orange;
 }
 
 
 /* .list-group-item:hover {
-	color: #FFA500;
+	color: orange;
 } */
 
 /*use color:orange for the orange color*/
