@@ -1,0 +1,19 @@
+/* Stylesheet for home view */
+/* Stylesheet for home view */
+/* rgb(74,33,22) */
+
+body {
+    background-image: url('/img/textures/264965-P4TIJM-916.jpg');
+    background-repeat: repeat;
+    
+}
+
+.bg-dimm-25 {
+    /* background-color: rgba(52,18,8,1) !important; */
+    background-color: rgba(74,33,22,0.25) !important;
+}
+
+.bg-dimm-98 {
+    /* background-color: rgba(52,18,8,1) !important; */
+    background-color: rgba(74,33,22,0.98) !important;
+}
