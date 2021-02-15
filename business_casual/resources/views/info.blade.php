@@ -10,13 +10,13 @@
     <link rel="stylesheet" href="{{ asset('css/home.css') }}" type="text/css">
     <title>Business casual</title>
     </head>
-  <body class="bg-dimm-25">
-      <div id=class="container-fluid">
+  <body >
+      <div class="container-fluid bg-dimm-25">
           <div id="header-row" class="row">
               <div class="col-12 text-center my-5">
                   <h1 class="text-white display-4 font-weight-bold">BUSINESS CASUAL</h1>
               </div>
-              <div class="col-12">
+              <div class="col-12 p-0">
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dimm-98">
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                       <span class="navbar-toggler-icon"></span>
@@ -25,20 +25,43 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                       <ul class="navbar-nav mr-auto ml-auto">
                         <li class="nav-item">
-                          <a class="nav-link" href="/">Home</a>
+                          <a class="nav-link h5" href="/">Home</a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" href="/login">Log in</a>
+                          <a class="nav-link h5 active text-warning" href="/login">Log in</a>
                         </li>
+                        @if(session()->has('loggedinUser'))
+                        <li class="nav-item">
+                          <a class="nav-link h5" href="/logout">Log out</a>
+                        </li>
+                        @endif
                     </ul>
                     </div>
                   </nav>
               </div>
           </div>
           <div id="body-row" class="row">
-           <div class="col-12">
-               <h1>Info</h1>
+           <div class="col-12 py-5 my-5">
+             <div class="container py-5">
+               <div class="row">
+                 <div class="col-12 text-white py-5 my-5">
+                   <h3 class="pb-3">Your name is: {{ session()->get('loggedinUser')['firstname'] }}</h3>
+                   <h3 class="pb-3">Your surname: is {{ session()->get('loggedinUser')['lastname'] }}</h3>
+                   <h3 class="pb-5">
+                     @if(session()->get('loggedinUser')['email']) 
+                        Your email is: {{ session()->get('loggedinUser')['email'] }}
+                     @endif
+                    </h3>
+                 </div>
+               </div>
+             </div>
            </div>
+          </div>
+
+          <div id="footer-row" class="row bg-dimm-98">
+            <div class="col-12 text-center text-light py-3">
+              Copyright &copy; Your Website 2021
+            </div>
           </div>
       </div>
 

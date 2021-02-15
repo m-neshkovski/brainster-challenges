@@ -10,10 +10,39 @@ body {
 
 .bg-dimm-25 {
     /* background-color: rgba(52,18,8,1) !important; */
-    background-color: rgba(74,33,22,0.25) !important;
+    background-color: rgba(74,33,22,0.65) !important;
 }
 
 .bg-dimm-98 {
     /* background-color: rgba(52,18,8,1) !important; */
     background-color: rgba(74,33,22,0.98) !important;
+}
+
+.bg-wight-dimm {
+    background-color: rgba(255,255,255,0.80);
+}
+
+#lorem-wrapper {
+    position: relative;
+}
+
+#lorem {
+    position: absolute;
+    top: 125px;
+    width: 450px;
+    z-index: 100;
+}
+
+#btn-wrapper {
+    position: relative;
+}
+
+#btn-visit {
+    position: absolute;
+    left: 150px;
+}
+
+.alert-custom {
+    background-color: red;
+    color: white;
 }

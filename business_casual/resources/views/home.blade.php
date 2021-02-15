@@ -11,12 +11,12 @@
     <title>Business casual</title>
     </head>
   <body class="bg-dimm-25">
-      <div id=class="container-fluid">
-          <div id="header-row" class="row">
+      <div class="container-fluid bg-dimm-25">
+          <div id="header-row" class="row mb-5">
               <div class="col-12 text-center my-5">
                   <h1 class="text-white display-4 font-weight-bold">BUSINESS CASUAL</h1>
               </div>
-              <div class="col-12">
+              <div class="col-12 p-0">
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dimm-98">
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                       <span class="navbar-toggler-icon"></span>
@@ -25,11 +25,16 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                       <ul class="navbar-nav mr-auto ml-auto">
                         <li class="nav-item">
-                          <a class="nav-link" href="/">Home</a>
+                          <a class="nav-link h5 active text-warning" href="/">Home</a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" href="/login">Log in</a>
+                          <a class="nav-link h5" href="/login">Log in</a>
                         </li>
+                        @if(session()->has('loggedinUser'))
+                        <li class="nav-item">
+                          <a class="nav-link h5" href="/logout">Log out</a>
+                        </li>
+                        @endif
                     </ul>
                     </div>
                   </nav>
@@ -39,22 +44,41 @@
             <div class="col-12">
               <div class="container">
                 <div class="row">
-                  <div class="col-12">
-                    <h2>Body content</h2>
+                  <div id="lorem-wrapper" class="col-3">
+                    <div id="lorem" class="bg-wight-dimm text-center p-3">
+                      <div id="btn-wrapper">
+                        <h5>LOREM IPSUM</h5>
+                        <h3>LOREM IPSUM</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam vero quas temporibus quo voluptas, aut odit obcaecati eaque velit repudiandae fugit! Iste praesentium nesciunt in necessitatibus perferendis recusandae a ab!</p>
+                        <a id="btn-visit" href="#" class="btn btn-warning">Visit us today</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-9">
+                    <img class="img-fluid" src="{{ asset('img/cafe.jpg') }}" alt="Image of the cafe.">
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col-12 bg-warning">
+            <div class="col-12 bg-warning my-5">
               <div class="container">
                 <div class="row">
-                  <div class="col-12">
-                    <h5>OUR PROMISE</h5>
-                    <h3>TO YOU</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio soluta hic, aliquid reiciendis minus amet nemo voluptate aliquam eum iusto quisquam nihil optio dignissimos quae sapiente incidunt cupiditate accusantium tenetur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab aliquid modi doloremque, vel, deleniti corporis, quo optio quis qui iste reiciendis. Harum consequatur minus inventore ab odit error magnam tempora.</p>
+                  <div class="col-12 p-5 text-center">
+                    <div class="row border border-light p-1">
+                      <div class="col-12 p-3 bg-light">
+                        <h5>OUR PROMISE</h5>
+                        <h3 class="text-uppercase">TO @if(session()->has('loggedinUser')) {{ session()->get('loggedinUser')['firstname'] . " " . session()->get('loggedinUser')['lastname'] }} @else YOU @endif</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio soluta hic, aliquid reiciendis minus amet nemo voluptate aliquam eum iusto quisquam nihil optio dignissimos quae sapiente incidunt cupiditate accusantium tenetur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab aliquid modi doloremque, vel, deleniti corporis, quo optio quis qui iste reiciendis. Harum consequatur minus inventore ab odit error magnam tempora.</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+          <div id="footer-row" class="row bg-dimm-98">
+            <div class="col-12 text-center text-light py-3">
+              Copyright &copy; Your Website 2021
             </div>
           </div>
       </div>

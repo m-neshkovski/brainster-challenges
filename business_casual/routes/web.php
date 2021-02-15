@@ -18,4 +18,6 @@ Route::get('/', function () {
 });
 
 Route::get('/login', [App\Http\Controllers\LoginController::class, 'login']);
+Route::get('/logout', [App\Http\Controllers\LoginController::class, 'logout']);
+Route::get('/info', [App\Http\Controllers\LoginController::class, 'info'])->name('info');
 Route::post('/login', [App\Http\Controllers\LoginController::class, 'validation']);
