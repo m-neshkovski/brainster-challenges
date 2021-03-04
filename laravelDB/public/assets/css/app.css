@@ -1,0 +1,20 @@
+.logo-font-size {
+    font-size: 10px;
+    text-decoration: none !important;
+}
+
+.header-bg-color {
+    background-color: #fcd232;
+}
+
+.custom-heart {
+    color: red;
+}
+
+.banner-col {
+    background-color: rgba(0,0,0,0.65);
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
