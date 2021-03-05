@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employer;
 use Illuminate\Http\Request;
 use App\Http\Requests\EmployerRequest;
-use App\Models\Employer;
+use App\Mail\EmployerAccepted;
+use Illuminate\Support\Facades\Mail;
 
 class EmployersController extends Controller
 {
@@ -14,8 +16,13 @@ class EmployersController extends Controller
         $e->email = $r->vrabotiEmail;
         $e->phone = $r->vrabotiPhone;
         $e->company_name = $r->vrabotiCompany;
+        
+        // $employer = Employer::findOrFail($e->id);
+        // dd($e);
+        
+        Mail::to($e->email)->send(new EmployerAccepted($e));
         $e->save();
-
+        
         return redirect(route('home', ['poraka' => true]));
     }
 }

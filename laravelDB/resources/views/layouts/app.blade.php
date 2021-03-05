@@ -103,11 +103,11 @@
             <form class="form-row" action="/employer/add" method="POST">
                 @csrf
                 <input type="text" class="d-none" value="true" id="modal-control" name="modal-control">
-                @if($_GET['poraka'])
+                @isset($_GET['poraka'])
                   <div class="alert alert-success" role="alert">
                     Вашите податоци се успешно внесени, доколку сакате можете да внесете и други.
                   </div>
-                @endif
+                @endisset
                 <div class="col-12 mb-3">
                   <label for="vrabotiEmail" class="form-label">Е-мејл</label>
                   <input type="text" class="form-control @error('title') is-invalid @enderror" id="vrabotiEmail" name="vrabotiEmail" value="{{ old('vrabotiEmail') }}">
