@@ -21,7 +21,7 @@
         }
     </style>
   </head>
-  <body>
+  <body class="{{ old('modal-control') ? 'modal-open' : '' }}">
       {{-- Нав бар --}}
       <div class="container-fluid">
           <div class="row">
@@ -38,7 +38,7 @@
                         <span class="navbar-toggler-icon"></span>
                       </button>
                       <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav ms-auto">
+                        <ul class="navbar-nav ms-auto fw-bold">
                           <li class="nav-item">
                             <a class="nav-link" href="https://codepreneurs.brainster.co/" target="_blank">Академија за програмирање</a>
                           </li>
@@ -92,35 +92,50 @@
   </button> --}}
   
   <!-- Modal -->
-  <div class="modal fade" id="vrabotiMidal" tabindex="-1" aria-labelledby="vrabotiMidalLabel" aria-hidden="true">
+  <div class="modal fade {{ old('modal-control') ? 'show' : '' }}" id="vrabotiMidal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="vrabotiModalLabel" {{ old('modal-control') ? "style=display:block; aria-modal=true role=dialog" : "aria-hidden=true" }}>
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="vrabotiMidalLabel">Вработи наш студент</h5>
+          <h5 class="modal-title" id="vrabotiModalLabel">Вработи наш студент</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form class="form-row">
+            <form class="form-row" action="/employer/add" method="POST">
                 @csrf
+                <input type="text" class="d-none" value="true" id="modal-control" name="modal-control">
+                @if($_GET['poraka'])
+                  <div class="alert alert-success" role="alert">
+                    Вашите податоци се успешно внесени, доколку сакате можете да внесете и други.
+                  </div>
+                @endif
                 <div class="col-12 mb-3">
                   <label for="vrabotiEmail" class="form-label">Е-мејл</label>
-                  <input type="text" class="form-control" id="vrabotiEmail" name="vrabotiEmail">
+                  <input type="text" class="form-control @error('title') is-invalid @enderror" id="vrabotiEmail" name="vrabotiEmail" value="{{ old('vrabotiEmail') }}">
+                  @error('vrabotiEmail')
+                      <div class="alert alert-danger">{{ $message }}</div>
+                  @enderror
                 </div>
                 <div class="col-12 mb-3">
                   <label for="vrabotiPhone" class="form-label">Телефон</label>
-                  <input type="text" class="form-control" id="vrabotiPhone" name="vrabotiPhone">
+                  <input type="text" class="form-control @error('title') is-invalid @enderror" id="vrabotiPhone" name="vrabotiPhone" value="{{ old('vrabotiPhone') }}">
+                  @error('vrabotiPhone')
+                      <div class="alert alert-danger">{{ $message }}</div>
+                  @enderror
                 </div>
                 <div class="col-12 mb-3">
                   <label for="vrabotiCompany" class="form-label">Компанија</label>
-                  <input type="text" class="form-control" id="vrabotiCompany" name="vrabotiCompany">
+                  <input type="text" class="form-control @error('title') is-invalid @enderror" id="vrabotiCompany" name="vrabotiCompany" value="{{ old('vrabotiCompany') }}">
+                  @error('vrabotiCompany')
+                      <div class="alert alert-danger">{{ $message }}</div>
+                  @enderror
                 </div>
                 <div class="col-12 d-grid">
                     <button type="submit" class="btn btn-warning">Испрати</button>
+                    <button type="button" class="d-none btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
               </form>
         </div>
         {{-- <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary">Save changes</button>
         </div> --}}
       </div>
@@ -135,7 +150,7 @@
         var vrabotiModalBtn = document.getElementById('vrabotiModalBtn')
         var myInput = document.getElementById('myInput')
 
-        vrabotiModalBtn.addEventListener('shown.bs.modal', function () {
+        vrabotiModalBtn.addEventListener('shown.bs.modal', function (e) {
         myInput.focus()
         })
     </script>
