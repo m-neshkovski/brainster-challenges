@@ -39,21 +39,30 @@
                       </button>
                       <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav ms-auto fw-bold">
-                          <li class="nav-item">
-                            <a class="nav-link" href="https://codepreneurs.brainster.co/" target="_blank">Академија за програмирање</a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link" href="https://marketpreneurs.brainster.co/" target="_blank">Академија за маркетинг</a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link" href="https://design.brainster.co/" target="_blank">Академија за дизајн</a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link" href="https://blog.brainster.co/" target="_blank">Блог</a>
-                          </li>
-                          <li class="nav-item">
-                            <a id="vrabotiModalBtn" type="button" class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#vrabotiMidal">Вработи наши студенти</a>
-                          </li>
+                            @if(session()->get('loggedin') !== NULL && session()->get('loggedin'))
+                              <li class="nav-item">
+                                <a id="logout" type="button" class="nav-link" href="/admin/logout">Одјави се</a>
+                              </li>
+                            @else
+                              <li class="nav-item">
+                                <a class="nav-link" href="https://codepreneurs.brainster.co/" target="_blank">Академија за програмирање</a>
+                              </li>
+                              <li class="nav-item">
+                                <a class="nav-link" href="https://marketpreneurs.brainster.co/" target="_blank">Академија за маркетинг</a>
+                              </li>
+                              <li class="nav-item">
+                                <a class="nav-link" href="https://design.brainster.co/" target="_blank">Академија за дизајн</a>
+                              </li>
+                              <li class="nav-item">
+                                <a class="nav-link" href="https://blog.brainster.co/" target="_blank">Блог</a>
+                              </li>
+                              <li class="nav-item">
+                                <a id="vrabotiModalBtn" type="button" class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#vrabotiMidal">Вработи наши студенти</a>
+                              </li>
+                              <li class="nav-item">
+                                <a class="nav-link" href="/admin/login">Логирај се</a>
+                              </li>
+                            @endif
                         </ul>
                       </div>
                     </div>
@@ -135,9 +144,6 @@
                 </div>
               </form>
         </div>
-        {{-- <div class="modal-footer">
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div> --}}
       </div>
     </div>
   </div>
@@ -153,6 +159,14 @@
         vrabotiModalBtn.addEventListener('shown.bs.modal', function (e) {
         myInput.focus()
         })
+
+        var deleteModal = document.getElementById('deleteModal')
+        var myInput = document.getElementById('myInput')
+
+        myModal.addEventListener('shown.bs.modal', function () {
+          myInput.focus()
+        })
+        
     </script>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/js/all.min.js" integrity="sha512-UwcC/iaz5ziHX7V6LjSKaXgCuRRqbTp1QHpbOJ4l1nw2/boCfZ2KlFIqBUA/uRVF0onbREnY9do8rM/uT/ilqw==" crossorigin="anonymous"></script>
