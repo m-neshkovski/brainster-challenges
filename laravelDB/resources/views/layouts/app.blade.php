@@ -21,7 +21,7 @@
         }
     </style>
   </head>
-  <body class="{{ old('modal-control') ? 'modal-open' : '' }}">
+  <body>
       {{-- Нав бар --}}
       <div class="container-fluid">
           <div class="row">
@@ -57,7 +57,7 @@
                                 <a class="nav-link" href="https://blog.brainster.co/" target="_blank">Блог</a>
                               </li>
                               <li class="nav-item">
-                                <a id="vrabotiModalBtn" type="button" class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#vrabotiMidal">Вработи наши студенти</a>
+                                <a id="vrabotiModalBtn" type="button" class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#vrabotiModal">Вработи наши студенти</a>
                               </li>
                               <li class="nav-item">
                                 <a class="nav-link" href="/admin/login">Логирај се</a>
@@ -91,7 +91,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="mx-2">- <a href="#">Say hi!</a> - Terms</div>
+                <div class="mx-2">- <a href="https://www.facebook.com/brainster.co/">Say hi!</a> - Terms</div>
             </div>
         </div>
       </div>
@@ -101,7 +101,7 @@
   </button> --}}
   
   <!-- Modal -->
-  <div class="modal fade {{ old('modal-control') ? 'show' : '' }}" id="vrabotiMidal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="vrabotiModalLabel" {{ old('modal-control') ? "style=display:block; aria-modal=true role=dialog" : "aria-hidden=true" }}>
+  <div class="modal fade" id="vrabotiModal" tabindex="-1" aria-labelledby="vrabotiModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -149,25 +149,20 @@
   </div>
 
       <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
     {{-- Script for modal --}}
+    @if ($errors->any())
     <script>
-        var vrabotiModalBtn = document.getElementById('vrabotiModalBtn')
-        var myInput = document.getElementById('myInput')
-
-        vrabotiModalBtn.addEventListener('shown.bs.modal', function (e) {
-        myInput.focus()
-        })
-
-        var deleteModal = document.getElementById('deleteModal')
-        var myInput = document.getElementById('myInput')
-
-        myModal.addEventListener('shown.bs.modal', function () {
-          myInput.focus()
-        })
-        
+        $(document).ready(function() {
+             $('#vrabotiModal').toggleClass('show');
+             $('#vrabotiModal').toggleClass('d-block');
+             $('#vrabotiModal').removeAttr('aria-hidden');
+             $('body').toggleClass('modal-open');
+        });
     </script>
-</body>
+    @endif
+  </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/js/all.min.js" integrity="sha512-UwcC/iaz5ziHX7V6LjSKaXgCuRRqbTp1QHpbOJ4l1nw2/boCfZ2KlFIqBUA/uRVF0onbREnY9do8rM/uT/ilqw==" crossorigin="anonymous"></script>
 </html>
