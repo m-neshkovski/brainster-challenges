@@ -155,7 +155,6 @@
     {{-- Script for modal --}}
     @if ($errors->any())
     <script>
-      @if(session()->get('poraka') === true)
         $(document).ready(function() {
              $('#vrabotiModal').toggleClass('show');
              $('#vrabotiModal').toggleClass('d-block');
@@ -169,9 +168,6 @@
               $('body').toggleClass('modal-open');
              })
         });
-      // @elseif(session()->get('poraka') === 'edit')
-
-      @endif
     </script>
     @endif
   </body>
