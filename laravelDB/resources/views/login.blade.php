@@ -5,7 +5,7 @@
 @section('body')
 
         <div class="row">
-            <div class="col-sm-12 col-md-6 offset-md-3 py-5">
+            <div class="col-xs-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4 py-5">
                 <h1>Login form</h1>
                   @if ($errors->any())
                       <div class="alert alert-danger">

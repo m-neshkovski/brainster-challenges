@@ -106,36 +106,36 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="vrabotiModalLabel">Вработи наш студент</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button id="vrabotiModalCloseBtn" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
             <form class="form-row" action="/employer/add" method="POST">
                 @csrf
                 <input type="text" class="d-none" value="true" id="modal-control" name="modal-control">
-                @isset($_GET['poraka'])
+                @if(session()->get('poraka') !== NULL && session()->get('poraka') === true)
                   <div class="alert alert-success" role="alert">
                     Вашите податоци се успешно внесени, доколку сакате можете да внесете и други.
                   </div>
-                @endisset
+                @endif
                 <div class="col-12 mb-3">
                   <label for="vrabotiEmail" class="form-label">Е-мејл</label>
-                  <input type="text" class="form-control @error('title') is-invalid @enderror" id="vrabotiEmail" name="vrabotiEmail" value="{{ old('vrabotiEmail') }}">
+                  <input type="text" class="form-control mb-2 @error('title') is-invalid @enderror" id="vrabotiEmail" name="vrabotiEmail" value="{{ old('vrabotiEmail') }}">
                   @error('vrabotiEmail')
-                      <div class="alert alert-danger">{{ $message }}</div>
+                      <div class="alert alert-danger py-2">{{ $message }}</div>
                   @enderror
                 </div>
                 <div class="col-12 mb-3">
                   <label for="vrabotiPhone" class="form-label">Телефон</label>
-                  <input type="text" class="form-control @error('title') is-invalid @enderror" id="vrabotiPhone" name="vrabotiPhone" value="{{ old('vrabotiPhone') }}">
+                  <input type="text" class="form-control mb-2 @error('title') is-invalid @enderror" id="vrabotiPhone" name="vrabotiPhone" value="{{ old('vrabotiPhone') }}">
                   @error('vrabotiPhone')
-                      <div class="alert alert-danger">{{ $message }}</div>
+                      <div class="alert alert-danger py-2">{{ $message }}</div>
                   @enderror
                 </div>
                 <div class="col-12 mb-3">
                   <label for="vrabotiCompany" class="form-label">Компанија</label>
-                  <input type="text" class="form-control @error('title') is-invalid @enderror" id="vrabotiCompany" name="vrabotiCompany" value="{{ old('vrabotiCompany') }}">
+                  <input type="text" class="form-control mb-2 @error('title') is-invalid @enderror" id="vrabotiCompany" name="vrabotiCompany" value="{{ old('vrabotiCompany') }}">
                   @error('vrabotiCompany')
-                      <div class="alert alert-danger">{{ $message }}</div>
+                      <div class="alert alert-danger py-2">{{ $message }}</div>
                   @enderror
                 </div>
                 <div class="col-12 d-grid">
@@ -155,12 +155,23 @@
     {{-- Script for modal --}}
     @if ($errors->any())
     <script>
+      @if(session()->get('poraka') === true)
         $(document).ready(function() {
              $('#vrabotiModal').toggleClass('show');
              $('#vrabotiModal').toggleClass('d-block');
              $('#vrabotiModal').removeAttr('aria-hidden');
              $('body').toggleClass('modal-open');
+
+             $('#vrabotiModalCloseBtn').on('click', function() {
+              $('#vrabotiModal').toggleClass('show');
+              $('#vrabotiModal').removeClass('d-block');
+              $('#vrabotiModal').addAttr('aria-hidden', true);
+              $('body').toggleClass('modal-open');
+             })
         });
+      // @elseif(session()->get('poraka') === 'edit')
+
+      @endif
     </script>
     @endif
   </body>

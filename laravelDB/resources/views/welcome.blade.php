@@ -10,7 +10,7 @@
 
 @if(session()->get('loggedin') !== NULL && session()->get('loggedin'))
 <div class="row">
-    <div class="col-12">
+    <div class="col-12 p-0 m-0">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -122,7 +122,7 @@
                             </div>
                         </div>
 
-                        <div class="tab-pane py-3 col-6 offset-3 fade" id="nav-create" role="tabpanel"
+                        <div class="tab-pane py-3 col-xs-12 col-md-6 offset-md-3 fade" id="nav-create" role="tabpanel"
                             aria-labelledby="nav-create-tab">
                             <h3>Креирај нов проект</h3>
                             @if ($errors->any())
@@ -152,7 +152,7 @@
                                     <label for="desc" class="form-label">Опис</label>
                                     <input type="text" class="form-control" id="desc" name="desc">
                                 </div>
-                                <button type="submit" class="btn btn-primary">Креирај</button>
+                                <button type="submit" class="btn btn-warning">Креирај</button>
                             </form>
                         </div>
 
@@ -171,14 +171,11 @@
     </div>
 </div>
 <div class="row cards-row pt-3">
-    <div class="col-12">
+    <div class="col-12 m-0 p-0">
         <div class="container">
             <div class="row">
-                <div class="col-12 text-center py-3">
-                    <h3>Проекти</h3>
-                </div>
                 @foreach($cards as $card)
-                <div class="col-sm-12 col-md-6 col-lg-4 pb-3">
+                <div class="col-xs-12 col-sm-6 col-lg-4 pb-3">
                     <div class="card">
                         <img src="{{ $card->image_url }}" class="card-img-top image-fluid" alt="...">
                         <div class="card-body">

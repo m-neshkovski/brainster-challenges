@@ -23,6 +23,6 @@ class EmployersController extends Controller
         Mail::to($e->email)->send(new EmployerAccepted($e));
         $e->save();
         
-        return redirect(route('home', ['poraka' => true]));
+        return redirect()->route('home', $r->session()->flash('poraka', true));
     }
 }
