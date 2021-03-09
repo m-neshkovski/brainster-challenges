@@ -34,4 +34,17 @@ class ProjectRequest extends FormRequest
             'desc' => 'required:max:200',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'image_url.required' => 'URL од слика е задолжително!',
+            'image_url.url' => 'URL-то не е валидно!',
+            'title.required' => 'Наслов е задолжителен!',
+            'subtitle.required' => 'Поднаслов е задолжителен!',
+            'desc.required' => 'Описот е задолжителен!',
+            'desc.маџ' => 'Описот не смее да е подолг од 200 карактери!',
+            
+        ];
+    }
 }

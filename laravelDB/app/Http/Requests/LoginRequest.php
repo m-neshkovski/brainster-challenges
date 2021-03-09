@@ -28,4 +28,15 @@ class LoginRequest extends FormRequest
             'password' => 'required:min:8',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Корисничко име е задолжително!',
+            'name.exists' => 'Корисничко име не постои!',
+            'password.required' => 'Лозинка е задолжителна!',
+            'password.min:8' => 'Лозинка е минимум 8 карактери!',
+            
+        ];
+    }
 }

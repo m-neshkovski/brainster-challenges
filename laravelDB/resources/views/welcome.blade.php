@@ -30,6 +30,17 @@
                             aria-labelledby="nav-edit-tab">
                             <div class="container">
                                 <div class="row">
+                                    @if ($errors->any())
+                                        <div class="col-12">
+                                            <div class="alert alert-danger">
+                                                <ul>
+                                                    @foreach ($errors->all() as $error)
+                                                        <li>{{ $error }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    @endif
                                     @foreach($cards as $card)
                                     <div class="col-sm-12 col-md-6 col-lg-4 pb-3">
                                         <div class="card">
@@ -38,11 +49,11 @@
                                                 <h5 class="card-title">{{ $card->title }}</h5>
                                                 <h6 class="card-subtitle">{{ $card->subtitle }}</h6>
                                                 <p class="card-text">{{ $card->desc }}</p>
-                                                <a href="/project/{{ $card->id }}" class="btn btn-warning">Повеќе</a>
+                                                <a href="/project/{{ $card->id }}" class="btn btn-warning mb-1">Повеќе</a>
                                                 <form class="d-inline-block" action="/project/{{ $card->id }}/edit" method="POST">
                                                     @csrf
                                                     <!-- Button trigger modal -->
-                                                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#editModal-{{ $card->id }}">
+                                                    <button type="button" class="btn btn-secondary mb-1" data-bs-toggle="modal" data-bs-target="#editModal-{{ $card->id }}">
                                                         Измени
                                                     </button>
                                                     
@@ -55,7 +66,7 @@
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                @if ($errors->any())
+                                                                {{-- @if ($errors->any())
                                                                     <div class="alert alert-danger">
                                                                         <ul>
                                                                             @foreach ($errors->all() as $error)
@@ -63,7 +74,7 @@
                                                                             @endforeach
                                                                         </ul>
                                                                     </div>
-                                                                @endif
+                                                                @endif --}}
                                                                 <div class="mb-3">
                                                                     <label for="image_url_{{ $card->id }}" class="form-label">URL од Слика</label>
                                                                     <input type="text" class="form-control" id="image_url_{{ $card->id }}" name="image_url" value="{{ $card->image_url }}">
@@ -91,7 +102,7 @@
                                                 </form>
                                                 <form class="d-inline-block" action="/project/{{ $card->id }}/delete" method="POST">
                                                     @csrf
-                                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal_{{ $card->id }}">
+                                                    <button type="button" class="btn btn-danger mb-1" data-bs-toggle="modal" data-bs-target="#deleteModal_{{ $card->id }}">
                                                         Избриши
                                                     </button>
                                                     <div class="modal fade" id="deleteModal_{{ $card->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteModal_{{ $card->id }}Label" aria-hidden="true">
@@ -126,12 +137,14 @@
                             aria-labelledby="nav-create-tab">
                             <h3>Креирај нов проект</h3>
                             @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
+                                <div class="col-12">
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
                                 </div>
                             @endif
                             <form action="/project/create" method="POST">
@@ -191,6 +204,54 @@
         </div>
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="vrabotiModal" tabindex="-1" aria-labelledby="vrabotiModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="vrabotiModalLabel">Вработи наш студент</h5>
+          <button id="vrabotiModalCloseBtn" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form class="form-row" action="/employer/add" method="POST">
+                @csrf
+                <input type="text" class="d-none" value="true" id="modal-control" name="modal-control">
+                @if(session()->get('poraka') !== NULL && session()->get('poraka') === true)
+                  <div class="alert alert-success" role="alert">
+                    Вашите податоци се успешно внесени, доколку сакате можете да внесете и други.
+                  </div>
+                @endif
+                <div class="col-12 mb-3">
+                  <label for="vrabotiEmail" class="form-label">Е-мејл</label>
+                  <input type="text" class="form-control mb-2 @error('title') is-invalid @enderror" id="vrabotiEmail" name="vrabotiEmail" value="{{ old('vrabotiEmail') }}">
+                  @error('vrabotiEmail')
+                      <div class="alert alert-danger py-2">{{ $message }}</div>
+                  @enderror
+                </div>
+                <div class="col-12 mb-3">
+                  <label for="vrabotiPhone" class="form-label">Телефон</label>
+                  <input type="text" class="form-control mb-2 @error('title') is-invalid @enderror" id="vrabotiPhone" name="vrabotiPhone" value="{{ old('vrabotiPhone') }}">
+                  @error('vrabotiPhone')
+                      <div class="alert alert-danger py-2">{{ $message }}</div>
+                  @enderror
+                </div>
+                <div class="col-12 mb-3">
+                  <label for="vrabotiCompany" class="form-label">Компанија</label>
+                  <input type="text" class="form-control mb-2 @error('title') is-invalid @enderror" id="vrabotiCompany" name="vrabotiCompany" value="{{ old('vrabotiCompany') }}">
+                  @error('vrabotiCompany')
+                      <div class="alert alert-danger py-2">{{ $message }}</div>
+                  @enderror
+                </div>
+                <div class="col-12 d-grid">
+                    <button type="submit" class="btn btn-warning">Испрати</button>
+                    <button type="button" class="d-none btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+              </form>
+        </div>
+      </div>
+    </div>
+  </div>
 @endif
 
 @endsection
