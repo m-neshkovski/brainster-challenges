@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Usertype;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,7 +15,7 @@ class AlterUsersAddUsertypeIdColumnAndConstaint extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->unsignedBigInteger('usertype_id');
+            $table->unsignedBigInteger('usertype_id')->default(Usertype::where('type', 'bloger')->first()->id);
             $table->foreign('usertype_id')->references('id')->on('usertypes');
         });
     }

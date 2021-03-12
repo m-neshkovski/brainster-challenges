@@ -14,13 +14,6 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        Category::create([
-            'name' => 'General',
-            'name' => 'Fun',
-            'name' => 'Sport',
-            'name' => 'Movies',
-            'name' => 'Politics',
-            'name' => 'Cars',
-        ]);
+        //
     }
 }

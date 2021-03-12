@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Usertype;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,25 +19,10 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-
-        // DB::table('usertypes')->insert([
-        //     ['type' => 'admin'],
-        //     ['type' => 'bloger'],
-        // ]);
-
-        Usertype::create([
-            'type' => 'admin',
-            'type' => 'bloger',
+        
+        $this->call([
+            // call seaders
         ]);
-
-        User::create([
-            'name' => 'Administrator',
-            'email' => 'admin@blog.com',
-            'password' => Hash::make('Kumanovo1.'),
-            'usertype_id' => Usertype::where('type', 'admin')->first()->id,
-        ]);
-
-        CategorySeeder::class;
 
 
     }

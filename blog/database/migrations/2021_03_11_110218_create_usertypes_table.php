@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\Usertype;
 
 class CreateUsertypesTable extends Migration
 {
@@ -18,6 +19,9 @@ class CreateUsertypesTable extends Migration
                 $table->string('type')->default('bloger');
             $table->timestamps();
         });
+
+        Usertype::create(['type' => 'admin']);
+        Usertype::create(['type' => 'bloger']);
     }
 
     /**
