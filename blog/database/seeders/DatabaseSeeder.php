@@ -8,6 +8,7 @@ use App\Models\Usertype;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Database\Seeders\CategorySeeder;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
