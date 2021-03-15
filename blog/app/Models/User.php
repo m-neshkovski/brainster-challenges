@@ -47,7 +47,7 @@ class User extends Authenticatable
     }
 
     public function type() {
-        return $this->belongsTo(Usertype::class);
+        return $this->belongsTo(Usertype::class, 'usertype_id');
     }
 
     public function themes() {

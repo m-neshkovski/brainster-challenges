@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Usertype;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Database\Seeders\CategorySeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,16 +19,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-
-        // DB::table('usertypes')->insert([
-        //     ['type' => 'admin'],
-        //     ['type' => 'bloger'],
-        // ]);
-
-        Usertype::create([
-            'type' => 'admin',
-            'type' => 'bloger',
-        ]);
+        Usertype::create(['type' => 'admin']);
+        Usertype::create(['type' => 'bloger']);
 
         User::create([
             'name' => 'Administrator',
@@ -36,8 +29,9 @@ class DatabaseSeeder extends Seeder
             'usertype_id' => Usertype::where('type', 'admin')->first()->id,
         ]);
 
-        CategorySeeder::class;
-
+        $this->call([
+            CategorySeeder::class,
+        ]);
 
     }
 }
