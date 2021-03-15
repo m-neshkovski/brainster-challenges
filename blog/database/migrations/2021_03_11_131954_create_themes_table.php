@@ -18,7 +18,7 @@ class CreateThemesTable extends Migration
                 $table->unsignedBigInteger('user_id');
                 $table->unsignedBigInteger('category_id');
                 $table->string('title');
-                $table->binary('image');
+                $table->string('image');
                 $table->text('description');
                 $table->boolean('is_approved')->default(false);
 

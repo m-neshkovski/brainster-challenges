@@ -9,6 +9,10 @@ class Comment extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'comment',
+    ];
+
     public function themes() {
         return $this->belongsToMany(Theme::class);
     }

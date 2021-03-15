@@ -9,6 +9,15 @@ class Theme extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'user_id',
+        'category_id',
+        'title',
+        'image',
+        'description',
+        'is_approved',
+    ];
+
     public function user() {
         return $this->belongsTo(User::class);
     }

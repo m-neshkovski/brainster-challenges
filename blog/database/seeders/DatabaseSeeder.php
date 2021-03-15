@@ -20,19 +20,19 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-        Usertype::create(['type' => 'admin']);
-        Usertype::create(['type' => 'bloger']);
+        // Usertype::create(['type' => 'admin']);
+        // Usertype::create(['type' => 'bloger']);
 
-        User::create([
-            'name' => 'Administrator',
-            'email' => 'admin@blog.com',
-            'password' => Hash::make('Kumanovo1.'),
-            'usertype_id' => Usertype::where('type', 'admin')->first()->id,
-        ]);
+        // User::create([
+        //     'name' => 'Administrator',
+        //     'email' => 'admin@blog.com',
+        //     'password' => Hash::make('Kumanovo1.'),
+        //     'usertype_id' => Usertype::where('type', 'admin')->first()->id,
+        // ]);
 
-        $this->call([
-            CategorySeeder::class,
-        ]);
+        // $this->call([
+        //     CategorySeeder::class,
+        // ]);
 
     }
 }
