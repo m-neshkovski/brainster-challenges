@@ -31,3 +31,6 @@ Route::get('/theme/{id}/edit', [ThemeController::class, 'edit'])->name('theme.ed
 Route::post('/theme/{id}/edit', [ThemeController::class, 'update'])->name('theme.update');
 Route::get('/theme/{id}/delete', [ThemeController::class, 'delete'])->name('theme.delete');
 Route::get('/theme/{id}/status', [ThemeController::class, 'status'])->name('theme.status')->middleware('admin');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -161,7 +161,7 @@ a {
 }
 a:hover {
   color: inherit;
-  text-decoration: underline;
+  /* text-decoration: underline; */
 }
 
 a:not([href]):not([class]) {
