@@ -98,6 +98,9 @@
                                             </div>
 
                                         @endforeach
+                                        
+                                            {{ $categories->links() }}
+                                        
                                     @else
                                         {{ __('There are still no blog themes in category') }}
                                     @endif
