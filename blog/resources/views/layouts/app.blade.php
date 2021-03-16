@@ -91,6 +91,14 @@
         <main class="py-4">
             @yield('content')
         </main>
+
+        <div class="container-fluid">
+            <footer class="row bg-white">
+                <div class="col-12 my-3 text-center">
+                    Challenge 23 Laravel Eloquent by Milosh Neshkovski
+                </div>
+            </footer>
+        </div>
     </div>
     
 </body>
