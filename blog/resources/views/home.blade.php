@@ -91,6 +91,7 @@
                                 </div>
 
                             @endforeach
+                            {{ $themes->links() }}
                         @else
                             @if(Route::currentRouteName() == 'home')
                             {{ __('You are logged in post your first theme!') }}

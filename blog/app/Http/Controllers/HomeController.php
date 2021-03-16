@@ -42,10 +42,10 @@ class HomeController extends Controller
 
     public function index()
     {
-        return view('home', ['themes' => Theme::where('user_id', Auth::user()->id)->orderByDesc('created_at')->get()]);
+        return view('home', ['themes' => Theme::where('user_id', Auth::user()->id)->orderByDesc('created_at')->paginate(10)]);
     }
 
     public function approve() {
-        return view('home', ['themes' => Theme::where('user_id', '!=', Auth::user()->id)->where('is_approved', 0)->orderByDesc('created_at')->get()]);
+        return view('home', ['themes' => Theme::where('user_id', '!=', Auth::user()->id)->where('is_approved', 0)->orderByDesc('created_at')->paginate(10)]);
     }
 }
