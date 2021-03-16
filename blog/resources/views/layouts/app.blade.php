@@ -43,6 +43,9 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
+                            <li class="nav-item">
+                                <a href="{{ url('/') }}" class="nav-link">Home</a>
+                            </li>
                             @if (Route::has('login'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -55,6 +58,13 @@
                                 </li>
                             @endif
                         @else
+                            <li class="nav-item">
+                                @if(Route::currentRouteName() == 'home')
+                                    <a href="{{ url('/') }}" class="nav-link">Home</a>
+                                    @else
+                                    <a href="{{ url('/home') }}" class="nav-link">Dashboard</a>
+                                @endif
+                            </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->first_name . " " . Auth::user()->last_name}}

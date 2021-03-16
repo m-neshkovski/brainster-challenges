@@ -27,6 +27,6 @@ class Theme extends Model
     }
 
     public function comments() {
-        return $this->belongsToMany(Comment::class);
+        return $this->belongsToMany(Comment::class, 'comment_theme');
     }
 }

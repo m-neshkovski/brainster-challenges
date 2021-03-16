@@ -14,10 +14,10 @@ class Comment extends Model
     ];
 
     public function themes() {
-        return $this->belongsToMany(Theme::class);
+        return $this->belongsToMany(Theme::class, 'comment_theme');
     }
 
     public function users() {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class, 'comment_user');
     }
 }
