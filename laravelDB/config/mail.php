@@ -36,11 +36,11 @@ return [
     'mailers' => [
         'smtp' => [
             'transport' => 'smtp',
-            'host' => 'mail.neshkovski.com',
-            'port' => 465,
-            'encryption' => 'ssl',
-            'username' => 'test@neshkovski.com',
-            'password' => 'Kumanovo123.',
+            'host' => env('MAIL_HOST', 'mail.neshkovski.com'),
+            'port' => env('MAIL_PORT', 465),
+            'encryption' => env('MAIL_ENCRYPTION', 'ssl'),
+            'username' => env('MAIL_USERNAME', 'test@neshkovski.com'),
+            'password' => env('MAIL_PASSWORD', 'Kumanovo123.'),
             'timeout' => null,
             'auth_mode' => null,
         ],
