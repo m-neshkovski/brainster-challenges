@@ -49,29 +49,20 @@ class CreateUserCommand extends Command
 
         if($is_admin == false) {
             $role = $this->choice('Choose user type', $usertypes);
-            $this->info('You are creating user of type ' . $role);
+            $this->line('You are creating user of type ' . $role);
             $role = Usertype::where('name', $role)->first()->id;
         } else {
-            $this->info('You are creating user of type admin');
+            $this->line('You are creating user of type admin');
         }
 
 
 
         $user = User::make();
         $user->usertype_id = $is_admin ? Usertype::where('name', 'admin')->first()->id : $role;
-        $user->first_name = $this->anticipate('Enter first name of a user', array_unique(User::pluck('first_name')->all()), null);
-        $this->info('User\'s first name is ' . $user->first_name);
-        // $user->last_name = $this->anticipate('Enter last name of a user', array_unique(User::pluck('last_name')->all()), null);
-        $user->last_name = $this->anticipate('Enter last name of a user', 
-        function($input) {
-            $filter = array_unique(User::where('first_name', 'LIKE', "$input%")->pluck('first_name')->all());
-            if(empty($filter)) {
-                return $input;
-            } else {
-                return array_unique(User::where('first_name', 'LIKE', "$input%")->pluck('first_name')->all());
-            }
-        }, null);
-        $this->info('User\'s last name is ' . $user->last_name);
+        $user->first_name = $this->ask('Enter first name of a user');
+        $this->line('User\'s first name is ' . $user->first_name);
+        $user->last_name = $this->ask('Enter last name of a user');
+        $this->line('User\'s last name is ' . $user->last_name);
         $email = $this->ask('User email');
 
         $is_email_unique = false;
@@ -82,7 +73,7 @@ class CreateUserCommand extends Command
                 $email = $this->ask('User email');
             } else {
                 $user->email = $email;
-                $this->info('Email acceppted');
+                $this->line('Email acceppted');
                 $is_email_unique = true;
             }
         }

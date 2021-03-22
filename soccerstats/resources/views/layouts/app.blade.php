@@ -16,6 +16,9 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
+    <!-- Fontawesume -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
@@ -37,6 +40,15 @@
                             <li class="nav-item">
                                 <a href="{{ url('/home') }}" class="nav-link">Dashboard</a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{ route('player.index') }}" class="nav-link">Players</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('team.index') }}" class="nav-link">Teams</a>
+                            </li>
+                            {{-- <li class="nav-item">
+                                <a href="{{ route('match.index') }}" class="nav-link">Matches</a>
+                            </li> --}}
                         @else
                             <li class="nav-item">
                                 <a href="{{ url('/') }}" class="nav-link">Home</a>

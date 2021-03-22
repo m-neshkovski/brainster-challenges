@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Team;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TeamController extends Controller
 {
@@ -14,7 +15,7 @@ class TeamController extends Controller
      */
     public function index()
     {
-        //
+        return view('team.index', ['teams' => Team::all()]);
     }
 
     /**
@@ -24,7 +25,7 @@ class TeamController extends Controller
      */
     public function create()
     {
-        //
+        return view('team.create');
     }
 
     /**
@@ -35,7 +36,18 @@ class TeamController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'year_founded' => 'required',
+        ]);
+
+        $team = Team::make();
+        $team->user_id = Auth::user()->id;
+        $team->name = $request->name;
+        $team->year_founded = $request->year_founded;
+        $team->save();
+
+        return redirect()->back()->with('status', 'Team successfully added.');
     }
 
     /**
@@ -55,9 +67,9 @@ class TeamController extends Controller
      * @param  \App\Models\Team  $team
      * @return \Illuminate\Http\Response
      */
-    public function edit(Team $team)
+    public function edit($id)
     {
-        //
+        return view('team.edit', ['team' => Team::find($id)]);
     }
 
     /**
@@ -67,9 +79,20 @@ class TeamController extends Controller
      * @param  \App\Models\Team  $team
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Team $team)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'year_founded' => 'required',
+        ]);
+
+        $team = Team::find($id);
+        $team->user_id = Auth::user()->id;
+        $team->name = $request->name;
+        $team->year_founded = $request->year_founded;
+        $team->save();
+
+        return redirect()->back()->with('status', 'Team successfully added.');
     }
 
     /**

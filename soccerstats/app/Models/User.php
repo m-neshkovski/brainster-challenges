@@ -47,4 +47,16 @@ class User extends Authenticatable
     public function usertype() {
         return $this->belongsTo(Usertype::class);
     }
+
+    public function teams() {
+        return $this->hasMany(Team::class);
+    }
+
+    public function players() {
+        return $this->hasMany(Player::class);
+    }
+
+    public function matches() {
+        return $this->hasMany(SMatch::class);
+    }
 }

@@ -18,15 +18,12 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         // create the admin
-
-        User::truncate();
-
         User::factory()->create([
             'usertype_id' => Usertype::where('name', 'admin')->first()->id,
             'email' => 'admin@admin.com',
             'password' => Hash::make('Kumanovo1.'),
         ]);
-
+        
         User::factory(10)->create();
     }
 }
