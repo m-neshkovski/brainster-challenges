@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SMatch extends Model
+class Match extends Model
 {
     use HasFactory;
 
@@ -23,11 +23,11 @@ class SMatch extends Model
     }
 
     public function homeTeam() {
-        return $this->belongsTo(Team::class);
+        return $this->belongsTo(Team::class, 'home_team');
     }
 
     public function guestTeam() {
-        return $this->belongsTo(Team::class);
+        return $this->belongsTo(Team::class, 'guest_team');
     }
 
     public function players() {

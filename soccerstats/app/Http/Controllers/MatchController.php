@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\SMatch;
+use App\Models\Match;
 use Illuminate\Http\Request;
 
 class MatchController extends Controller
@@ -14,7 +14,7 @@ class MatchController extends Controller
      */
     public function index()
     {
-        //
+        return view('match.index', ['matches' => Match::all()]);
     }
 
     /**

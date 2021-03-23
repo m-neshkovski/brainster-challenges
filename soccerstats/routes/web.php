@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\TeamController;
+use App\Http\Controllers\MatchController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -39,3 +40,11 @@ Route::get('/teams/{id}', [TeamController::class, 'show'])->name('team.show');
 Route::get('/teams/{id}/edit', [TeamController::class, 'edit'])->name('team.edit');
 Route::post('/teams/{id}/edit', [TeamController::class, 'update'])->name('team.update');
 Route::post('/teams/{id}/delete', [TeamController::class, 'destroy'])->name('team.destroy');
+
+Route::get('/matches', [MatchController::class, 'index'])->name('match.index');
+Route::get('/matches/create', [MatchController::class, 'create'])->name('match.create');
+Route::post('/matches/create', [MatchController::class, 'store'])->name('match.store');
+Route::get('/matches/{id}', [MatchController::class, 'show'])->name('match.show');
+Route::get('/matches/{id}/edit', [MatchController::class, 'edit'])->name('match.edit');
+Route::post('/matches/{id}/edit', [MatchController::class, 'update'])->name('match.update');
+Route::post('/matches/{id}/delete', [MatchController::class, 'destroy'])->name('match.destroy');

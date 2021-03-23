@@ -46,9 +46,9 @@
                             <li class="nav-item">
                                 <a href="{{ route('team.index') }}" class="nav-link">Teams</a>
                             </li>
-                            {{-- <li class="nav-item">
+                            <li class="nav-item">
                                 <a href="{{ route('match.index') }}" class="nav-link">Matches</a>
-                            </li> --}}
+                            </li>
                         @else
                             <li class="nav-item">
                                 <a href="{{ url('/') }}" class="nav-link">Home</a>
