@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10">
             <a href="{{ route('team.create') }}" class="btn btn-primary mb-2">Add team</a>
             <div class="card">
                 <div class="card-header">{{ __('Teams') }}</div>
@@ -28,9 +28,14 @@
                             <tr>
                                 <td>{{ $team->id }}</td>
                                 <td>{{ $team->name }}</td>
-                                <td>{{ date('d.m.Y', strtotime($team->year_founded)) }}</td>
+                                <td>{{ date('Y', strtotime($team->year_founded)) }}</td>
                                 <td>
+                                    <a href="/teams/{{ $team->id }}" class="btn btn-secondary"><i class="fas fa-info"></i></a>
                                     <a href="/teams/{{ $team->id }}/edit" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                                    <form class="d-inline-block" action="/teams/{{ $team->id }}/delete" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                                    </form>
                                 </td>
                             </tr>
                             @endforeach

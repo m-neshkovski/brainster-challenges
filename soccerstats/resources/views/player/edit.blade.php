@@ -42,7 +42,11 @@
                             <select id="team_id" name="team_id" class="form-control">
                                 <option value="" selected disabled>Select team</option>
                                 @foreach(App\Models\Team::all() as $team)
-                                    <option value="{{ $team->id }}" {{ (old('dob') ? old('dob') : $player->dob) == $team->id ? 'selected' : '' }}>{{ $team->name }}</option>
+                                    @if(count($player->team) > 0)
+                                        <option value="{{ $team->id }}" {{ (old('team_id') ? old('team_id') : $player->team->last()->id) == $team->id ? 'selected' : '' }}>{{ $team->name }}</option>
+                                        @else
+                                        <option value="{{ $team->id }}" {{ old('team_id') == $team->id ? 'selected' : '' }}>{{ $team->name }}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>

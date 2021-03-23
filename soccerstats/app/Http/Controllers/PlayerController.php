@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Player;
+use App\Models\Player_team;
 use App\Models\Team;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -49,15 +50,19 @@ class PlayerController extends Controller
         $player->first_name = $request->first_name;
         $player->last_name = $request->last_name;
         $player->dob = $request->dob;
+        $player->save();
 
         if($request->team_id) {
-            DB::table('player_team')->create([
-                'team_id' => $request->team_id,
-                'player_id' => $player->id,
-            ]);
+            $p_t = Player_team::make();
+            $p_t->player_id = $player->id;
+            $p_t->team_id = $request->team_id;
+            $p_t->save();
+            // DB::table('player_team')->insert([
+            //     'player_id' => $player->id,
+            //     'team_id' => $request->team_id,
+            // ]);
         }
 
-        $player->save();
         
         return redirect()->back()->with('status', 'Player successfully added.');
     }
@@ -70,7 +75,7 @@ class PlayerController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('player.show', ['player' => Player::find($id)]);
     }
 
     /**
@@ -107,15 +112,18 @@ class PlayerController extends Controller
         $player->first_name = $request->first_name;
         $player->last_name = $request->last_name;
         $player->dob = $request->dob;
+        $player->update();
 
         if($request->team_id) {
-            DB::table('player_team')->update([
-                'team_id' => $request->team_id,
-                'player_id' => $player->id,
-            ]);
+            $p_t = Player_team::make();
+            $p_t->player_id = $player->id;
+            $p_t->team_id = $request->team_id;
+            $p_t->save();
+            // DB::table('player_team')->where('player_id', $player->id)->update([
+            //     'team_id' => $request->team_id,
+            //     'player_id' => $player->id,
+            // ]);
         }
-
-        $player->update();
         
         return redirect()->back()->with('status', 'Player successfully updated.');
     }
@@ -126,8 +134,11 @@ class PlayerController extends Controller
      * @param  \App\Models\Player  $player
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Player $player)
+    public function destroy($id)
     {
-        //
+        Player_team::where('player_id', $id)->delete();
+        Player::find($id)->delete();
+
+        return redirect()->back()->with('status', 'Player was deleted');
     }
 }

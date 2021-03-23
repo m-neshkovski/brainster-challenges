@@ -21,7 +21,7 @@ class CreatePlayersTable extends Migration
                 $table->date('dob');
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

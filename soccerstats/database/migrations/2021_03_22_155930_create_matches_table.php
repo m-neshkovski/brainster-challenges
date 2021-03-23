@@ -23,9 +23,9 @@ class CreateMatchesTable extends Migration
                 $table->smallInteger('guest_score')->nullable()->default(null);
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('home_team')->references('id')->on('teams');
-            $table->foreign('guest_team')->references('id')->on('teams');
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('home_team')->references('id')->on('teams')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('guest_team')->references('id')->on('teams')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

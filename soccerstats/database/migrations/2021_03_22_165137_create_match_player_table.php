@@ -20,8 +20,8 @@ class CreateMatchPlayerTable extends Migration
                 $table->boolean('has_played')->default(false);
             $table->timestamps();
 
-            $table->foreign('match_id')->references('id')->on('matches');
-            $table->foreign('player_id')->references('id')->on('players');
+            $table->foreign('match_id')->references('id')->on('matches')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('player_id')->references('id')->on('players')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

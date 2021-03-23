@@ -17,7 +17,7 @@ class AddUsertypeIdToUsersTable extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->unsignedBigInteger('usertype_id')->after('id')->default(Usertype::where('name', 'guest')->first()->id);
 
-            $table->foreign('usertype_id')->references('id')->on('usertypes');
+            $table->foreign('usertype_id')->references('id')->on('usertypes')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

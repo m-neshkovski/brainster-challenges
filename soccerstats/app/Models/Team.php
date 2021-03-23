@@ -20,7 +20,7 @@ class Team extends Model
     }
 
     public function players() {
-        return $this->belongsToMany(Player::class. 'player_team');
+        return $this->belongsToMany(Player::class, 'player_team');
     }
 
     public function homeMatches() {

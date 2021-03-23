@@ -19,8 +19,8 @@ class CreatePlayerTeamTable extends Migration
                 $table->unsignedBigInteger('team_id');
             $table->timestamps();
 
-            $table->foreign('player_id')->references('id')->on('players');
-            $table->foreign('team_id')->references('id')->on('teams');
+            $table->foreign('player_id')->references('id')->on('players')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('team_id')->references('id')->on('teams')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
