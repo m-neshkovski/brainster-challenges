@@ -77,7 +77,25 @@ class GameController extends Controller
      */
     public function show($id)
     {
-        return view('match.show', ['match' => Game::find($id)]);
+        $match = Game::find($id);
+        
+        foreach($match->homeTeam->players as $player) {
+            if(Game_player::where('game_id', $match->id)->where('player_id', $player->id)->first()->has_played) {
+                $homePlayers['played'][] = $player;
+            } else {
+                $homePlayers['bench'][] = $player;
+            }
+        }
+
+        foreach($match->guestTeam->players as $player) {
+            if(Game_player::where('game_id', $match->id)->where('player_id', $player->id)->first()->has_played) {
+                $guestPlayers['played'][] = $player;
+            } else {
+                $guestPlayers['bench'][] = $player;
+            }
+        }
+
+        return view('match.show', ['match' => $match, 'homePlayers' => $homePlayers, 'guestPlayers' => $guestPlayers]);
     }
 
     /**
