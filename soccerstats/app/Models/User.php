@@ -57,6 +57,6 @@ class User extends Authenticatable
     }
 
     public function matches() {
-        return $this->hasMany(SMatch::class);
+        return $this->hasMany(Game::class);
     }
 }

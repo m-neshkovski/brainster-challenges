@@ -13,7 +13,7 @@ class CreateMatchesTable extends Migration
      */
     public function up()
     {
-        Schema::create('matches', function (Blueprint $table) {
+        Schema::create('games', function (Blueprint $table) {
             $table->id();
                 $table->unsignedBigInteger('user_id');
                 $table->unsignedBigInteger('home_team');
@@ -21,6 +21,7 @@ class CreateMatchesTable extends Migration
                 $table->dateTime('schaduled_at');
                 $table->smallInteger('home_score')->nullable()->default(null);
                 $table->smallInteger('guest_score')->nullable()->default(null);
+                $table->boolean('is_finished')->default(false);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
@@ -36,6 +37,6 @@ class CreateMatchesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('matches');
+        Schema::dropIfExists('games');
     }
 }

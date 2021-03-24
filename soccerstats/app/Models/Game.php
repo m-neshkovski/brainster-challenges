@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Match extends Model
+class Game extends Model
 {
     use HasFactory;
 
@@ -16,6 +16,7 @@ class Match extends Model
         'schaduled_at',
         'home_score',
         'guest_score',
+        'is_finished',
     ];
 
     public function user() {
@@ -31,6 +32,6 @@ class Match extends Model
     }
 
     public function players() {
-        return $this->belongsToMany(Player::class, 'match_player');
+        return $this->belongsToMany(Player::class, 'game_player');
     }
 }

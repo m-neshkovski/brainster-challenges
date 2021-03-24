@@ -57,10 +57,6 @@ class PlayerController extends Controller
             $p_t->player_id = $player->id;
             $p_t->team_id = $request->team_id;
             $p_t->save();
-            // DB::table('player_team')->insert([
-            //     'player_id' => $player->id,
-            //     'team_id' => $request->team_id,
-            // ]);
         }
 
         
@@ -119,10 +115,6 @@ class PlayerController extends Controller
             $p_t->player_id = $player->id;
             $p_t->team_id = $request->team_id;
             $p_t->save();
-            // DB::table('player_team')->where('player_id', $player->id)->update([
-            //     'team_id' => $request->team_id,
-            //     'player_id' => $player->id,
-            // ]);
         }
         
         return redirect()->back()->with('status', 'Player successfully updated.');

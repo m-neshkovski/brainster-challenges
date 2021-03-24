@@ -24,10 +24,10 @@ class Team extends Model
     }
 
     public function homeMatches() {
-        return $this->hasMany(SMatch::class, 'home_team');
+        return $this->hasMany(Game::class, 'home_team');
     }
 
     public function awayMatches() {
-        return $this->hasMany(SMatch::class, 'guest_team');
+        return $this->hasMany(Game::class, 'guest_team');
     }
 }

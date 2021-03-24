@@ -25,6 +25,6 @@ class Player extends Model
     }
 
     public function matches() {
-        return $this->belongsToMany(SMatch::class, 'match_player');
+        return $this->belongsToMany(Game::class, 'game_player');
     }
 }
