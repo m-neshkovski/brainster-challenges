@@ -24,6 +24,7 @@
                                 <td class="text-center" scope="col">Home team</td>
                                 <td class="text-center" scope="col">Guest team</td>
                                 <td class="text-center" scope="col">Result</td>
+                                <td class="text-center" scope="col">Status</td>
                                 <td scope="col" class="text-right">Actions</td>
                             </tr>
                         </thead>
@@ -36,6 +37,7 @@
                                     <td class="text-center"><a href="/teams/{{ $match->homeTeam->id }}">{{ $match->homeTeam->name }}</a></td>
                                     <td class="text-center"><a href="/teams/{{ $match->guestTeam->id }}">{{ $match->guestTeam->name }}</a></td>
                                     <td class="text-center">{{ $match->home_score == null ? 'Comming up' : $match->home_score . " : " . $match->guest_score }}</td>
+                                    <td class="text-center">{{ $match->is_finished ? 'Final score' : ($match->home_score == null ? 'Not started' : 'In progress') }}</td>
                                     <td class="text-right">
                                         <a href="/matches/{{ $match->id }}" class="btn btn-secondary"><i class="fas fa-info"></i></a>
                                         @if(Auth::user()->usertype->name == 'admin')
