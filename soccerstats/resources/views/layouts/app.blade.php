@@ -36,28 +36,21 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        @auth
-                            <li class="nav-item">
-                                <a href="{{ url('/home') }}" class="nav-link">Dashboard</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('player.index') }}" class="nav-link">Players</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('team.index') }}" class="nav-link">Teams</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('match.index') }}" class="nav-link">Matches</a>
-                            </li>
-                        @else
-                            <li class="nav-item">
-                                <a href="{{ url('/') }}" class="nav-link">Home</a>
-                            </li>
-                        @endauth
                     </ul>
-
+                    
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
+                        @auth
+                            <li class="nav-item {{ Route::currentRouteName() == 'match.index' ? 'active' : '' }}">
+                                <a href="{{ route('match.index') }}" class="nav-link">Matches</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('team.index') }}" class="nav-link {{ Route::currentRouteName() == 'team.index' ? 'active' : '' }}">Teams</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('player.index') }}" class="nav-link {{ Route::currentRouteName() == 'player.index' ? 'active' : '' }}">Players</a>
+                            </li>
+                        @endauth
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))

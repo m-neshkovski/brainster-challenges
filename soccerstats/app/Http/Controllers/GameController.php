@@ -78,6 +78,15 @@ class GameController extends Controller
     public function show($id)
     {
         $match = Game::find($id);
+
+        $homePlayers = [
+            'played' => [],
+            'bench' => [],
+        ];
+        $guestPlayers = [
+            'played' => [],
+            'bench' => [],
+        ];
         
         foreach($match->homeTeam->players as $player) {
             if(Game_player::where('game_id', $match->id)->where('player_id', $player->id)->first()->has_played) {

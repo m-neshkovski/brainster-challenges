@@ -4,9 +4,11 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-10">
-            <a href="{{ route('match.create') }}" class="btn btn-primary mb-2">Add match</a>
+            @if(Auth::user()->usertype->name == 'admin')
+                <a href="{{ route('match.create') }}" class="btn btn-primary mb-2">Add match</a>
+            @endif
             <div class="card">
-                <div class="card-header">{{ __('Matches') }}</div>
+                <div class="card-header h3">{{ __('Matches') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -17,12 +19,12 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <td>id</td>
-                                <td>Schaduled at</td>
-                                <td>Home team</td>
-                                <td>Guest team</td>
-                                <td>Result</td>
-                                <td>Actions</td>
+                                <td scope="col">id</td>
+                                <td scope="col">Schaduled at</td>
+                                <td class="text-center" scope="col">Home team</td>
+                                <td class="text-center" scope="col">Guest team</td>
+                                <td class="text-center" scope="col">Result</td>
+                                <td scope="col" class="text-right">Actions</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -31,16 +33,18 @@
                                 <tr>
                                     <td>{{ $match->id }}</td>
                                     <td>{{ date('d.m.Y h:i', strtotime($match->schaduled_at)) }}</td>
-                                    <td>{{ $match->homeTeam->name }}</td>
-                                    <td>{{ $match->guestTeam->name }}</td>
-                                    <td>{{ $match->home_score == null ? 'Comming up' : $match->home_score . " : " . $match->guest_score }}</td>
-                                    <td>
+                                    <td class="text-center"><a href="/teams/{{ $match->homeTeam->id }}">{{ $match->homeTeam->name }}</a></td>
+                                    <td class="text-center"><a href="/teams/{{ $match->guestTeam->id }}">{{ $match->guestTeam->name }}</a></td>
+                                    <td class="text-center">{{ $match->home_score == null ? 'Comming up' : $match->home_score . " : " . $match->guest_score }}</td>
+                                    <td class="text-right">
                                         <a href="/matches/{{ $match->id }}" class="btn btn-secondary"><i class="fas fa-info"></i></a>
-                                        <a href="/matches/{{ $match->id }}/edit" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-                                        <form class="d-inline-block" action="/matches/{{ $match->id }}/delete" method="POST">
-                                        @csrf
-                                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
-                                        </form>
+                                        @if(Auth::user()->usertype->name == 'admin')
+                                            <a href="/matches/{{ $match->id }}/edit" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                                            <form class="d-inline-block" action="/matches/{{ $match->id }}/delete" method="POST">
+                                                @csrf
+                                            <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                                            </form>
+                                        @endif
                                     </td>
                                 </tr>
                                 @endforeach
