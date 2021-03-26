@@ -7,7 +7,6 @@
             <a href="{{ url()->previous() }}" class="btn btn-primary mb-2">Back</a>
             <div class="card">
                 <div class="card-header">{{ __('Match info card') }}</div>
-
                 <div class="card-body row justify-content-center">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
@@ -21,22 +20,20 @@
                         <a href="/teams/{{ $match->home_team }}">{{ $match->homeTeam->name }}</a>
                     </div>
                     <div class="col-sm-12 col-lg-1 text-center display-4 mb-4">
-                        {{ $match->home_score ? $match->home_score : '/' }}
+                        {{ $match->home_score !== null ? $match->home_score : '/' }}
                     </div>
                     <div class="col-sm-12 col-lg-1 text-center display-4 mb-4">
                         :
                     </div>
                     <div class="col-sm-12 col-lg-1 text-center display-4 mb-4">
-                        {{ $match->guest_score ? $match->guest_score : '/' }}
+                        {{ $match->guest_score !== null ? $match->guest_score : '/' }}
                     </div>
                     <div class="col-sm-12 col-lg-4 text-center display-4 mb-4">
                         <a href="/teams/{{ $match->gurst_team }}">{{ $match->guestTeam->name }}</a>
                     </div>
-
                     <div class="col-sm-12 mb-4">
                         <div id="accordion">
                             <div class="card">
-
                               <div class="card-header" id="playersTab">
                                 <h5 class="mb-0">
                                   <button class="btn btn-secondary" data-toggle="collapse" data-target="#collapsePlayers" aria-expanded="false" aria-controls="collapsePlayers">
@@ -44,7 +41,6 @@
                                   </button>
                                 </h5>
                               </div>
-                          
                               <div id="collapsePlayers" class="collapse" aria-labelledby="playersTab" data-parent="#accordion">
                                 <div class="card-body row">
                                     <div class="col-sm-12 col-lg-6">
@@ -95,11 +91,9 @@
                                     </div>
                                 </div>
                               </div>
-
                             </div>
                         </div>
                     </div>
-                    
                 </div>
             </div>
         </div>

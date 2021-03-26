@@ -7,7 +7,6 @@
             <a href="{{ route('team.index') }}"class="btn btn-secondary mb-2">Back to teams list</a>
             <div class="card">
                 <div class="card-header">{{ __('Create team form') }}</div>
-
                 <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">

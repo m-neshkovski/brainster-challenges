@@ -5,17 +5,18 @@ use App\Http\Controllers\TeamController;
 use App\Http\Controllers\GameController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Game;
 
 Route::get('/', function () {
-    return view('welcome');
+    if(Auth::user()) {
+        return redirect()->route('match.index');
+    }
+    return view('welcome', ['matches' => Game::where('is_finished', false)->orderBy('schaduled_at')->paginate(10)]);
 });
 
 Auth::routes();
 
 Route::middleware('auth')->group(function() {
-
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
     Route::prefix('players')->group(function () {
         Route::middleware('admin')->group(function() {
             Route::get('/create', [PlayerController::class, 'create'])->name('player.create');
@@ -27,7 +28,6 @@ Route::middleware('auth')->group(function() {
         Route::get('/', [PlayerController::class, 'index'])->name('player.index');
         Route::get('/{id}', [PlayerController::class, 'show'])->name('player.show');
     });
-    
     Route::prefix('teams')->group(function () {
         Route::middleware('admin')->group(function() {
             Route::get('/create', [TeamController::class, 'create'])->name('team.create');
@@ -39,7 +39,6 @@ Route::middleware('auth')->group(function() {
         Route::get('/', [TeamController::class, 'index'])->name('team.index');
         Route::get('/{id}', [TeamController::class, 'show'])->name('team.show');
     });
-    
     Route::prefix('matches')->group(function () {
         Route::middleware('admin')->group(function() {
             Route::get('/create', [GameController::class, 'create'])->name('match.create');

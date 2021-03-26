@@ -7,11 +7,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateUsertypesTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('usertypes', function (Blueprint $table) {
@@ -24,11 +19,6 @@ class CreateUsertypesTable extends Migration
         Usertype::create(['name' => 'guest']);
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('usertypes');

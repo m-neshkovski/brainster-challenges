@@ -10,21 +10,10 @@ use Illuminate\Support\Facades\Date;
 
 class TeamFactory extends Factory
 {
-    /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
     protected $model = Team::class;
 
-    /**
-     * Define the model's default state.
-     *
-     * @return array
-     */
     public function definition()
     {
-        
         return [
             'user_id' => User::where('usertype_id', Usertype::where('name', 'admin')->first()->id)->first()->id,
             'name' => $this->faker->firstName,

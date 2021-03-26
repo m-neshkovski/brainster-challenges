@@ -11,7 +11,6 @@
                         <a href="{{ route('match.create') }}" class="btn btn-primary ml-auto">Add match</a>
                     @endif
                 </div>
-
                 <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
@@ -23,10 +22,12 @@
                             {{ session('error') }}
                         </div>
                     @endif
-                    <table class="table">
-                        <thead>
+                    <table class="table table-hover">
+                        <thead class="table-light">
                             <tr>
-                                <td scope="col">id</td>
+                                @if(Auth::user()->usertype->name == 'admin')
+                                    <td scope="col">id</td>
+                                @endif
                                 <td scope="col">Schaduled at</td>
                                 <td class="text-center" scope="col">Home team</td>
                                 <td class="text-center" scope="col">Guest team</td>
@@ -39,7 +40,9 @@
                             @if(count($matches) > 0)
                                 @foreach($matches as $match)
                                 <tr>
-                                    <td>{{ $match->id }}</td>
+                                    @if(Auth::user()->usertype->name == 'admin')
+                                        <td>{{ $match->id }}</td>
+                                    @endif
                                     <td>{{ date('d.m.Y', strtotime($match->schaduled_at)) }}</td>
                                     <td class="text-center"><a href="/teams/{{ $match->homeTeam->id }}">{{ $match->homeTeam->name }}</a></td>
                                     <td class="text-center"><a href="/teams/{{ $match->guestTeam->id }}">{{ $match->guestTeam->name }}</a></td>
@@ -71,7 +74,6 @@
                                     </td>
                                 </tr>
                             @endif
-
                         </tbody>
                     </table>
                 </div>

@@ -12,7 +12,7 @@ class GameSeeder extends Seeder
 {
     public function run()
     {
-        $games = Game::factory(20)->create();
+        $games = Game::factory(40)->create();
         foreach($games as $game) {
             foreach(Team::find($game->home_team)->players as $player) {
                 Game_player::create([

@@ -8,14 +8,9 @@ use Illuminate\Database\Seeder;
 
 class TeamSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
-        Team::factory(10)
+        Team::factory(15)
             ->hasAttached(Player::factory()->count(20))
             ->create();
     }

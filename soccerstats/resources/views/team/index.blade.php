@@ -22,10 +22,12 @@
                             {{ session('error') }}
                         </div>
                     @endif
-                    <table class="table">
-                        <thead>
+                    <table class="table table-hover">
+                        <thead class="table-light">
                             <tr>
-                                <td scope="col">id</td>
+                                @if(Auth::user()->usertype->name == 'admin')
+                                    <td scope="col">id</td>
+                                @endif
                                 <td scope="col">Name</td>
                                 <td scope="col">Founded</td>
                                 <td scope="col" class="text-center">Actions</td>
@@ -34,7 +36,9 @@
                         <tbody>
                             @foreach($teams as $team)
                             <tr>
-                                <td>{{ $team->id }}</td>
+                                @if(Auth::user()->usertype->name == 'admin')
+                                    <td>{{ $team->id }}</td>
+                                @endif
                                 <td>{{ $team->name }}</td>
                                 <td>{{ date('Y', strtotime($team->year_founded)) }}</td>
                                 <td class="text-right">
@@ -54,7 +58,6 @@
                                 </td>
                             </tr>
                             @endforeach
-
                         </tbody>
                     </table>
                 </div>

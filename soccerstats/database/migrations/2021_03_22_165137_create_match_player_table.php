@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateMatchPlayerTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('game_player', function (Blueprint $table) {
@@ -25,11 +20,6 @@ class CreateMatchPlayerTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('game_player');

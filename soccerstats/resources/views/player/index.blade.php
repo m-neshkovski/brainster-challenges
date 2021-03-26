@@ -4,9 +4,6 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-10">
-            {{-- @if(Auth::user()->usertype->name == 'admin')
-                <a href="{{ route('player.create') }}" class="btn btn-primary mb-2">Add player</a>
-            @endif --}}
             <div class="card mb-2">
                 <div class="card-header d-flex justyfy-content-between align-items-center">
                     <span class="h3">Players</span>
@@ -14,7 +11,6 @@
                         <a href="{{ route('player.create') }}" class="btn btn-primary ml-auto">Add player</a>
                     @endif
                 </div>
-
                 <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
@@ -26,10 +22,12 @@
                             {{ session('error') }}
                         </div>
                     @endif
-                    <table class="table">
-                        <thead>
+                    <table class="table table-hover">
+                        <thead class="table-light">
                             <tr>
-                                <td scope="col">id</td>
+                                @if(Auth::user()->usertype->name == 'admin')
+                                    <td scope="col">id</td>
+                                @endif
                                 <td scope="col">First name</td>
                                 <td scope="col">Last name</td>
                                 <td scope="col">Date of birth</td>
@@ -40,11 +38,13 @@
                         <tbody>
                             @foreach($players as $player)
                             <tr>
-                                <td>{{ $player->id }}</td>
+                                @if(Auth::user()->usertype->name == 'admin')
+                                    <td>{{ $player->id }}</td>
+                                @endif
                                 <td>{{ $player->first_name }}</td>
                                 <td>{{ $player->last_name }}</td>
                                 <td>{{ date('d.m.Y', strtotime($player->dob)) }}</td>
-                                <td>{{ count($player->team) > 0 ? "<a>{$player->team->last()->name}</a>" : 'Free player' }}</td>
+                                <td><a href="{{ count($player->team) > 0 ? '/teams/' . $player->team->last()->id : '' }}">{{ count($player->team) > 0 ? $player->team->last()->name : 'Free player' }}</a></td>
                                 <td class="text-right">
                                     <a href="/players/{{ $player->id }}" class="btn btn-secondary"><i class="fas fa-info"></i></a>
                                     @if(Auth::user()->usertype->name == 'admin')

@@ -127,8 +127,6 @@ class GameController extends Controller
 
     public function destroy(Request $request, $id)
     {
-        // dd($request->all());
-
         if($request->has('confirm_deletion')) {
             Game::find($id)->delete();
             return redirect()->back()->with('status', 'Match deleted successfully');

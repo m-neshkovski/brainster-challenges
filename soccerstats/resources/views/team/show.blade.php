@@ -7,7 +7,6 @@
             <a href="{{ url()->previous() }}" class="btn btn-primary mb-2">Back</a>
             <div class="card">
                 <div class="card-header">{{ __('Team info card') }}</div>
-
                 <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
@@ -20,7 +19,9 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th scope="col">ID</th>
+                                @if(Auth::user()->usertype->name == 'admin')
+                                    <th scope="col">id</th>
+                                @endif
                                 <th scope="col">Full name</th>
                                 <th scope="col">Date of birth</th>
                             </tr>
@@ -28,12 +29,13 @@
                         <tbody>
                             @foreach($team->players as $player)
                                 <tr>
-                                    <td>{{ $player->id }}</td>
+                                    @if(Auth::user()->usertype->name == 'admin')
+                                        <td>{{ $player->id }}</td>
+                                    @endif
                                     <td><a href="/players/{{ $player->id }}">{{ $player->first_name }} {{ $player->last_name }}</a></td>
                                     <td>{{ $player->dob }}</td>
                                 </tr>
                             @endforeach
-
                         </tbody>
                     </table>
                 </div>
