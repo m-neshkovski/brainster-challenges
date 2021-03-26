@@ -18,7 +18,7 @@
                         Match
                     </div>
                     <div class="col-sm-12 col-lg-4 text-center display-4 mb-4">
-                        {{ $match->homeTeam->name }}
+                        <a href="/teams/{{ $match->home_team }}">{{ $match->homeTeam->name }}</a>
                     </div>
                     <div class="col-sm-12 col-lg-1 text-center display-4 mb-4">
                         {{ $match->home_score ? $match->home_score : '/' }}
@@ -30,7 +30,7 @@
                         {{ $match->guest_score ? $match->guest_score : '/' }}
                     </div>
                     <div class="col-sm-12 col-lg-4 text-center display-4 mb-4">
-                        {{ $match->guestTeam->name }}
+                        <a href="/teams/{{ $match->gurst_team }}">{{ $match->guestTeam->name }}</a>
                     </div>
 
                     <div class="col-sm-12 mb-4">
@@ -53,7 +53,7 @@
                                         <ul>
                                             @if(count($homePlayers['played']) > 0)
                                                 @foreach($homePlayers['played'] as $player)
-                                                    <li>{{ $player->first_name }} {{ $player->last_name }}</li>
+                                                    <li><a href="/players/{{ $player->id }}">{{ $player->first_name }} {{ $player->last_name }}</a></li>
                                                 @endforeach
                                             @else
                                                 <li>No data</li>
@@ -63,7 +63,7 @@
                                         <ul>
                                             @if(count($homePlayers['bench']) > 0)
                                                 @foreach($homePlayers['bench'] as $player)
-                                                    <li>{{ $player->first_name }} {{ $player->last_name }}</li>
+                                                    <li><a href="/players/{{ $player->id }}">{{ $player->first_name }} {{ $player->last_name }}</a></li>
                                                 @endforeach
                                             @else
                                                 <li>No data</li>
@@ -76,7 +76,7 @@
                                         <ul>
                                             @if(count($guestPlayers['played']) > 0)
                                                 @foreach($guestPlayers['played'] as $player)
-                                                    <li>{{ $player->first_name }} {{ $player->last_name }}</li>
+                                                    <li><a href="/players/{{ $player->id }}">{{ $player->first_name }} {{ $player->last_name }}</a></li>
                                                 @endforeach
                                             @else
                                                 <li>No data</li>
@@ -86,7 +86,7 @@
                                         <ul>
                                             @if(count($guestPlayers['bench']) > 0)
                                                 @foreach($guestPlayers['bench'] as $player)
-                                                    <li>{{ $player->first_name }} {{ $player->last_name }}</li>
+                                                    <li><a href="/players/{{ $player->id }}">{{ $player->first_name }} {{ $player->last_name }}</a></li>
                                                 @endforeach
                                             @else
                                                 <li>No data</li>

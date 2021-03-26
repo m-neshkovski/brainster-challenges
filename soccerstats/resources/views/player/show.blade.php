@@ -20,7 +20,7 @@
                     <p>Other teams player played for:</p>
                     <ul>
                         @foreach($player->team as $team)
-                            <li>{{ $team->name }}</li>
+                            <li><a href="/teams/{{ $team->id }}">{{ $team->name }}</a></li>
                         @endforeach
                     </ul>
                 </div>

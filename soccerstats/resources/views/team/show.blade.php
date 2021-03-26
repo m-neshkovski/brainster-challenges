@@ -21,8 +21,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">ID</th>
-                                <th scope="col">First name</th>
-                                <th scope="col">Last name</th>
+                                <th scope="col">Full name</th>
                                 <th scope="col">Date of birth</th>
                             </tr>
                         </thead>
@@ -30,8 +29,7 @@
                             @foreach($team->players as $player)
                                 <tr>
                                     <td>{{ $player->id }}</td>
-                                    <td>{{ $player->first_name }}</td>
-                                    <td>{{ $player->last_name }}</td>
+                                    <td><a href="/players/{{ $player->id }}">{{ $player->first_name }} {{ $player->last_name }}</a></td>
                                     <td>{{ $player->dob }}</td>
                                 </tr>
                             @endforeach

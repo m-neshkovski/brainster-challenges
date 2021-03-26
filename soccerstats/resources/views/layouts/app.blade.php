@@ -92,6 +92,10 @@
         <main class="py-4">
             @yield('content')
         </main>
+
+        <footer class="bg-white text-center py-3">
+            Challenge 24 Laravel Auth by Milosh Neshkovski
+        </footer>
     </div>
 </body>
 </html>

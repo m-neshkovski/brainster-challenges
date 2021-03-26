@@ -34,7 +34,7 @@
                             <select type="date" id="year_founded" name="year_founded" class="form-control" value="{{ old('year_founded') }}">
                                 <option value="" selected disabled>Select year</option>
                                 @for($i = date('Y', strtotime(now())); $i > 1900; $i--)
-                                <option value="{{ $i }}">{{ $i }}</option>
+                                    <option value="{{ $i }}">{{ $i }}</option>
                                 @endfor
                             </select>
                         </div>

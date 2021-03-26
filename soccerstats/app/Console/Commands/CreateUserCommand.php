@@ -9,59 +9,22 @@ use Illuminate\Support\Facades\Hash;
 
 class CreateUserCommand extends Command
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
-    protected $signature = 'user:create {is_admin=0}';
+    protected $signature = 'soccer:createadmin';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'Create user from command line. Specify type.';
+    protected $description = 'Create admin user from command line.';
 
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         parent::__construct();
     }
 
-    /**
-     * Execute the console command.
-     *
-     * @return int
-     */
     public function handle()
     {
-        $is_admin = $this->argument('is_admin');
-        
-        // $input = 'S';
-        // dd(User::where('first_name', 'LIKE', "$input%")->pluck('first_name')->all());
-
-        $usertypes = Usertype::pluck('name')->all();
-
-        if($is_admin == false) {
-            $role = $this->choice('Choose user type', $usertypes);
-            $this->line('You are creating user of type ' . $role);
-            $role = Usertype::where('name', $role)->first()->id;
-        } else {
-            $this->line('You are creating user of type admin');
-        }
-
-
-
         $user = User::make();
-        $user->usertype_id = $is_admin ? Usertype::where('name', 'admin')->first()->id : $role;
-        $user->first_name = $this->ask('Enter first name of a user');
+        $user->usertype_id = Usertype::where('name', 'admin')->first()->id;
+        $user->first_name = $this->ask('Enter first name of admin user');
         $this->line('User\'s first name is ' . $user->first_name);
-        $user->last_name = $this->ask('Enter last name of a user');
+        $user->last_name = $this->ask('Enter last name of admin user');
         $this->line('User\'s last name is ' . $user->last_name);
         $email = $this->ask('User email');
 
@@ -95,14 +58,12 @@ class CreateUserCommand extends Command
         
         $this->table(
         [
-            'Role',
             'First name',
             'Last name',
             'Email',
         ],
         [
             [
-            'Role' => ucfirst(Usertype::find($user->usertype)->first()->name),
             'First name' => ucfirst($user->first_name),
             'Last name' => ucfirst($user->last_name),
             'Email' => $user->email,
@@ -110,7 +71,7 @@ class CreateUserCommand extends Command
         ]);
             
         $user->save();
-        $this->info('User was successfuly created.');
+        $this->info('Admin user was successfuly created.');
         return 0;
     }
 }
