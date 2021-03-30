@@ -3,7 +3,7 @@ require('./bootstrap');
 var headers = {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
-    // 'Authorization': 'Bearer ' + $('meta[name="api-token"]').attr('content')
+    'Authorization': 'Bearer ' + $('meta[name="api-token"]').attr('content')
 }
 
 function refreshVehicleTable() {

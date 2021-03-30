@@ -29,7 +29,7 @@ class VehicleFactory extends Factory
             'brand' => $faker->vehicleBrand,
             'model' => $faker->vehicleModel,
             'plate_number' => $faker->vehicleRegistration('[A-Z]{2}-[0-9]{4}-[A-Z]{2}'),
-            'insurance_date' => $this->faker->dateTimeThisYear,
+            'insurance_date' => $this->faker->dateTimeBetween('-6 months', '+6 months'),
         ];
     }
 }

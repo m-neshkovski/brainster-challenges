@@ -23,7 +23,7 @@ class VehicleApiController extends Controller
         $request->validate([
             'brand' => 'required|string',
             'model' => 'required|string',
-            'plate_number' => 'required|regex:/[A-Z]{2}-[0-9]{4}-[A-Z]{2}/|unique:vehicles,plate_number',
+            'plate_number' => 'required|string|min:10|max:10|regex:/^[A-Z]{2}-[0-9]{4}-[A-Z]{2}$/|unique:vehicles,plate_number',
             'insurance_date' => 'required|date',
         ]);
 
@@ -75,7 +75,10 @@ class VehicleApiController extends Controller
             'model' => 'required|string',
             'plate_number' => [
                 'required',
-                'regex:/[A-Z]{2}-[0-9]{4}-[A-Z]{2}/',
+                'string',
+                'min:10',
+                'max:10',
+                'regex:/^[A-Z]{2}-[0-9]{4}-[A-Z]{2}$/',
                 Rule::unique('vehicles')->ignore($vehicle->id),
             ],
             'insurance_date' => 'required|date',
