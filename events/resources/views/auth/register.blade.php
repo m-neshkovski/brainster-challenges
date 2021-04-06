@@ -61,6 +61,20 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="role_id" class="col-md-4 col-form-label text-md-right">{{ __('User role') }}</label>
+
+                            <div class="col-md-6">
+                                <select id="role_id" class="form-control" name="role_id">
+                                    <option value="" selected disabled>Select user role</option>
+                                    @foreach(\App\Models\Role::all() as $role) {
+                                        <option value="{{ $role->id }}">{{ ucfirst($role->name) }}</option>
+                                    }
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
