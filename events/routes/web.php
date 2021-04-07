@@ -13,12 +13,14 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Auth::routes();
+
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('welcome');
+
+Route::middleware('auth')->group(function() {
+    
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('user.home');
+    
+    Route::get('/dashboard', [App\Http\Controllers\UserController::class, 'index'])->name('user.dashboard')->middleware(['admin']);
+
 });
-
-Auth::routes(['verify' => true]);
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware(['auth', 'verified']);
-
-Route::get('/dashboard', [App\Http\Controllers\UserController::class, 'index'])->name('user.dashboard')->middleware(['auth', 'verified', 'admin']);
