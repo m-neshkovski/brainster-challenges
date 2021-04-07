@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\UserEmailVerification;
 use App\Models\User;
+use App\Models\VerifyEmail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -16,6 +20,46 @@ class UserController extends Controller
     {
         return view('user.dashboard', ['users' => User::with('role')->get()]);
     }
+
+    public function notice() {
+        return view('user.verification.notice');
+    }
+
+    public function validateUserEmail($id, $validation_token_hash) {
+        $user = User::with('emailTokens')->find($id);
+
+        if($user->emailTokens->last()->email_verify_token == $validation_token_hash) {
+            $user->email_verified_at = now();
+            $user->is_active = true;
+            $user->update();
+        }
+
+        return redirect()->route('user.home');
+    }
+
+    public function resend($id) {
+        $user = User::with('emailTokens')->find($id);
+
+        if(count($user->emailTokens) == 0) {
+
+            $token = VerifyEmail::make();
+            $token->user_id = $id;
+            $token->email_verify_token = Str::random(80);
+            $token->save();
+
+            Mail::to($user->email)->send(new UserEmailVerification($user));
+            return redirect()->route('verification.notice')->with('status', 'Verification email sent.');
+        } else {
+            dd($user);
+        }
+
+
+
+
+        Mail::to($user->email)->send(new UserEmailVerification($user));
+    }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -36,10 +80,6 @@ class UserController extends Controller
     public function store(Request $request)
     {
         // done in register controller
-    }
-
-    public function validateUser($id, $validation_token) {
-
     }
 
     /**

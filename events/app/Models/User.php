@@ -21,6 +21,7 @@ class User extends Authenticatable
         'role_id',
         'email',
         'password',
+        'remember_token',
         'is_active',
     ];
 
@@ -45,5 +46,9 @@ class User extends Authenticatable
 
     public function role() {
         return $this->belongsTo(Role::class);
+    }
+
+    public function emailTokens() {
+        return $this->hasMany(VerifyEmail::class);
     }
 }
