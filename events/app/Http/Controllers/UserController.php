@@ -21,43 +21,7 @@ class UserController extends Controller
         return view('user.dashboard', ['users' => User::with('role')->get()]);
     }
 
-    public function notice() {
-        return view('user.verification.notice');
-    }
-
-    public function validateUserEmail($id, $validation_token_hash) {
-        $user = User::with('emailTokens')->find($id);
-
-        if($user->emailTokens->last()->email_verify_token == $validation_token_hash) {
-            $user->email_verified_at = now();
-            $user->is_active = true;
-            $user->update();
-        }
-
-        return redirect()->route('user.home');
-    }
-
-    public function resend($id) {
-        $user = User::with('emailTokens')->find($id);
-
-        if(count($user->emailTokens) == 0) {
-
-            $token = VerifyEmail::make();
-            $token->user_id = $id;
-            $token->email_verify_token = Str::random(80);
-            $token->save();
-
-            Mail::to($user->email)->send(new UserEmailVerification($user));
-            return redirect()->route('verification.notice')->with('status', 'Verification email sent.');
-        } else {
-            dd($user);
-        }
-
-
-
-
-        Mail::to($user->email)->send(new UserEmailVerification($user));
-    }
+    
 
 
 

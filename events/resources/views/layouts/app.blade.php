@@ -46,7 +46,7 @@
                                 </li>
                             @endif
                         @else
-                            @if(auth()->user()->role->name == 'admin')
+                            @if(auth()->user()->role->name == 'admin' && auth()->user()->is_active)
                                 @if (Route::has('register'))
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ route('register') }}">{{ __('New user') }}</a>

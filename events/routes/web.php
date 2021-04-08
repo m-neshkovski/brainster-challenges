@@ -19,10 +19,10 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('we
 
 Route::middleware('auth')->group(function() {
     
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('user.home')->middleware('verified');
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('user.home')->middleware(['verified', 'not_admin']);
     
     Route::get('/dashboard', [App\Http\Controllers\UserController::class, 'index'])->name('user.dashboard')->middleware(['verified', 'admin']);
-    Route::get('/verification/notice', [App\Http\Controllers\UserController::class, 'notice'])->name('verification.notice');
-    Route::get('/verification/resend/{id}', [App\Http\Controllers\UserController::class, 'resend'])->name('verification.resend');
+    Route::get('/verification/notice', [App\Http\Controllers\EmailVerificationController::class, 'notice'])->name('verification.notice');
+    Route::get('/verification/resend/{id}', [App\Http\Controllers\EmailVerificationController::class, 'resend'])->name('verification.resend');
 });
-Route::get('/verification/{id}/{validation_token_hash}', [App\Http\Controllers\UserController::class, 'validateUserEmail'])->name('verification.verify');
+Route::get('/verification/{id}/{validation_token}', [App\Http\Controllers\EmailVerificationController::class, 'validateUserEmail'])->name('verification.verify');

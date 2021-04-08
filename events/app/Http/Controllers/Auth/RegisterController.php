@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\UserEmailVerification;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\VerifyEmail;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -66,7 +69,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'role_id' => $data['role_id'],
             'name' => $data['name'],
             'email' => $data['email'],
@@ -74,5 +77,16 @@ class RegisterController extends Controller
             'remember_token' => Str::random(10),
             'is_active' => false,
         ]);
+
+        $token = VerifyEmail::make();
+        $token->user_id = $user->id;
+        $token->email_verify_token = Str::random(80);
+        $token->save();
+
+        Mail::to($user->email)->send(new UserEmailVerification($user));
+
+        redirect()->route('user.dashboard')->with('status', 'New user was created');
+
+        return $user;
     }
 }
