@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\SendVerificationEmail;
 use App\Mail\UserEmailVerification;
 use App\Models\User;
 use App\Models\VerifyEmail;
@@ -58,7 +59,8 @@ class EmailVerificationController extends Controller
             $token->email_verify_token = Str::random(80);
             $token->save();
 
-            Mail::to($user->email)->send(new UserEmailVerification($user));
+            SendVerificationEmail::dispatch($user);
+            // Mail::to($user->email)->send(new UserEmailVerification($user));
             return redirect()->route('verification.notice')->with('status', 'Verification email sent.');
         } else {
             $token = $user->emailTokens->last();
