@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\SendVerificationEmail;
 use App\Http\Controllers\Controller;
 use App\Mail\UserEmailVerification;
 use App\Providers\RouteServiceProvider;
@@ -83,7 +84,7 @@ class RegisterController extends Controller
         $token->email_verify_token = Str::random(80);
         $token->save();
 
-        Mail::to($user->email)->send(new UserEmailVerification($user));
+        SendVerificationEmail::dispatch($user);
 
         redirect()->route('user.dashboard')->with('status', 'New user was created');
 

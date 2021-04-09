@@ -39,7 +39,7 @@ class EmailVerificationController extends Controller
 
                 $user = User::with('emailTokens')->find($id);
 
-                Mail::to($user->email)->send(new UserEmailVerification($user));
+                SendVerificationEmail::dispatch($user);
                 return redirect()->route('verification.notice')->with('status', 'Email verification token expierd. New verification email was sent, please try again.');
             }
         } else {
@@ -60,14 +60,14 @@ class EmailVerificationController extends Controller
             $token->save();
 
             SendVerificationEmail::dispatch($user);
-            // Mail::to($user->email)->send(new UserEmailVerification($user));
+
             return redirect()->route('verification.notice')->with('status', 'Verification email sent.');
         } else {
             $token = $user->emailTokens->last();
             if(date('Y-m-d H:i:s', strtotime(date('Y-m-d H:i:s', strtotime($token->created_at))."+48 hour")) > date('Y-m-d H:i:s', strtotime(now()))) {
 
                 // tokenot ne e istecen da se prati istiont mejl povtorno
-                Mail::to($user->email)->send(new UserEmailVerification($user));
+                SendVerificationEmail::dispatch($user);
                 return redirect()->route('verification.notice')->with('status', 'Email verification token still active. New verification email was sent.');
                 
             } else {
@@ -81,7 +81,7 @@ class EmailVerificationController extends Controller
 
                 $user = User::with('emailTokens')->find($id);
 
-                Mail::to($user->email)->send(new UserEmailVerification($user));
+                SendVerificationEmail::dispatch($user);
                 return redirect()->route('verification.notice')->with('status', 'Email verification token expierd. New verification email was sent, please try again.');
             }
         }
