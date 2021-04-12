@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\SendVerificationEmail;
+use App\Events\SetUserAsActive;
 use App\Mail\UserEmailVerification;
 use App\Models\User;
 use App\Models\VerifyEmail;
@@ -24,9 +25,11 @@ class EmailVerificationController extends Controller
         if($token->email_verify_token == $validation_token) {
             if(date('Y-m-d H:i:s', strtotime(date('Y-m-d H:i:s', strtotime($token->created_at))."+48 hour")) > date('Y-m-d H:i:s', strtotime(now()))) {
                 $user->email_verified_at = now();
-                $user->is_active = true;
+                // $user->is_active = true;
+                
+                SetUserAsActive::dispatch($user);
                 $user->update();
-    
+                
                 $token->delete();
             } else {
 

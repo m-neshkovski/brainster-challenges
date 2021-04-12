@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Events\SendVerificationEmail;
+use App\Events\SetUserAsActive;
+use App\Listeners\ActivateUser;
 use App\Listeners\VerificationMailListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -32,6 +34,10 @@ class EventServiceProvider extends ServiceProvider
         Event::listen(
             SendVerificationEmail::class,
             [VerificationMailListener::class, 'handle']
+        );
+        Event::listen(
+            SetUserAsActive::class,
+            [ActivateUser::class, 'handle']
         );
     }
 }
