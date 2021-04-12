@@ -9,7 +9,7 @@
 <body>
     <h1>Hi {{ $user->name }},</h1>
 
-    please follow this <a href="/verification/{{ $user->id }}/{{ $hashed_email_token }}" target="_blank">link to verify your email address.</a>
+    please follow this <a href="http://localhost:8000/verification/{{ $user->id }}/{{ $hashed_email_token }}" target="_blank">link to verify your email address.</a>
 
     Do not reply to this mail, it is just sent for account verification.
 
